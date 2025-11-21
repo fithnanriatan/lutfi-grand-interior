@@ -22,19 +22,21 @@ class ReviewsTable
     {
         return $table
             ->columns([
+                 // Kolom nama pelanggan
                 TextColumn::make('customer_name')
                     ->label('Nama Pelanggan')
                     ->searchable()
                     ->sortable()
                     ->weight('bold'),
 
+                // Kolom email pelanggan
                 TextColumn::make('customer_email')
                     ->label('Email')
                     ->searchable()
                     ->copyable()
                     ->icon('heroicon-o-envelope')
                     ->toggleable(),
-
+                // Menampilkan nama customer dari relasi booking
                 TextColumn::make('booking.customer_name')
                     ->label('Booking Terkait')
                     ->searchable()
@@ -43,6 +45,7 @@ class ReviewsTable
                     ->badge()
                     ->color('info'),
 
+                // Kolom rating dengan warna badge dinamis
                 TextColumn::make('rating')
                     ->label('Rating')
                     ->badge()
@@ -64,18 +67,22 @@ class ReviewsTable
                     })
                     ->sortable(),
 
+                // Switch status persetujuan review
                 ToggleColumn::make('is_approved')
                     ->label('Status')
                     ->sortable()
                     ->afterStateUpdated(function ($record, $state) {
                         // Optional: Log atau notifikasi ketika status berubah
+                        // Bisa ditambahkan log atau notifikasi
                     }),
 
+                 // Waktu dibuat
                 TextColumn::make('created_at')
                     ->label('Tanggal Review')
                     ->dateTime('d M Y H:i')
                     ->sortable(),
 
+                    // Waktu diperbarui
                 TextColumn::make('updated_at')
                     ->label('Diperbarui')
                     ->dateTime('d M Y H:i')
@@ -83,6 +90,7 @@ class ReviewsTable
                     ->toggleable(isToggledHiddenByDefault: true),
             ])
             ->filters([
+                 // Filter berdasarkan rating (bisa multi select)
                 SelectFilter::make('rating')
                     ->label('Rating')
                     ->options([
@@ -94,16 +102,19 @@ class ReviewsTable
                     ])
                     ->multiple(),
 
+                    // Filter review yang disetujui / tidak
                 TernaryFilter::make('is_approved')
                     ->label('Status Persetujuan')
                     ->placeholder('Semua review')
                     ->trueLabel('Hanya yang disetujui')
                     ->falseLabel('Hanya yang belum disetujui'),
 
+                    // Filter review yang punya booking
                 Filter::make('has_booking')
                     ->label('Memiliki Booking')
                     ->query(fn(Builder $query): Builder => $query->whereNotNull('booking_id')),
 
+                    // Filter review tanpa booking
                 Filter::make('no_booking')
                     ->label('Tanpa Booking')
                     ->query(fn(Builder $query): Builder => $query->whereNull('booking_id')),
@@ -114,6 +125,7 @@ class ReviewsTable
             ])
             ->bulkActions([
                 BulkActionGroup::make([
+                    // Aksi bulk setujui
                     BulkAction::make('approve')
                         ->label('Setujui Terpilih')
                         ->icon('heroicon-o-check-circle')
@@ -122,6 +134,7 @@ class ReviewsTable
                         ->deselectRecordsAfterCompletion()
                         ->requiresConfirmation(),
 
+                        // Aksi bulk tolak
                     BulkAction::make('reject')
                         ->label('Tolak Terpilih')
                         ->icon('heroicon-o-x-circle')
@@ -130,9 +143,11 @@ class ReviewsTable
                         ->deselectRecordsAfterCompletion()
                         ->requiresConfirmation(),
 
+                        // Aksi hapus bawaan Filament
                     DeleteBulkAction::make(),
                 ]),
             ])
+            // Default sort paling baru
             ->defaultSort('created_at', 'desc');
     }
 }

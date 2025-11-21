@@ -17,23 +17,24 @@ class ReviewForm
             ->components([
                 Section::make('Informasi Review')
                     ->schema([
+                        // Relasi opsional ke booking (agar review bisa terkait pesanan)
                         Select::make('booking_id')
                             ->label('Booking (Opsional)')
                             ->relationship('booking', 'customer_name')
                             ->searchable()
                             ->preload()
                             ->helperText('Hubungkan review dengan booking yang ada'),
-                        
+                        // Nama pelanggan yang memberikan review
                         TextInput::make('customer_name')
                             ->label('Nama Pelanggan')
                             ->required()
                             ->maxLength(255),
-                        
+                        // Email pelanggan (opsional)
                         TextInput::make('customer_email')
                             ->label('Email')
                             ->email()
                             ->maxLength(255),
-                        
+                        // Rating 1–5
                         Select::make('rating')
                             ->label('Rating')
                             ->options([
@@ -45,7 +46,7 @@ class ReviewForm
                             ])
                             ->required()
                             ->native(false),
-                        
+                        // Status persetujuan review (apakah ditampilkan di website)
                         Toggle::make('is_approved')
                             ->label('Disetujui')
                             ->default(false)

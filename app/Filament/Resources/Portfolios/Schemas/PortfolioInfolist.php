@@ -14,33 +14,37 @@ class PortfolioInfolist
     {
         return $schema
             ->components([
+                // Menampilkan semua gambar proyek
                 Section::make('Galeri Proyek')
                     ->schema([
+                         // ImageEntry: menampilkan daftar gambar
+                        // Field 'images' harus berupa array URL
                         ImageEntry::make('images')
                             ->label('Gambar')
-                            ->columnSpanFull(),
+                            ->columnSpanFull(), // memakai seluruh lebar
                     ]),
                 
                 Section::make('Informasi Proyek')
                     ->schema([
+                         // Nama proyek
                         TextEntry::make('project_name')
                             ->label('Nama Proyek')
                             ->columnSpanFull(),
-                        
+                        // Deskripsi
                         TextEntry::make('description')
                             ->label('Deskripsi')
                             ->columnSpanFull(),
-                        
+                        // Nama klien
                         TextEntry::make('client_name')
                             ->label('Nama Klien'),
-                        
+                        // Lokasi proyek
                         TextEntry::make('location')
                             ->label('Lokasi'),
-                        
+                         // Tanggal selesai 
                         TextEntry::make('completion_date')
                             ->label('Tanggal Selesai')
                             ->date('d F Y'),
-                        
+                        // Status 
                         TextEntry::make('category')
                             ->label('Kategori')
                             ->badge(),
@@ -57,10 +61,11 @@ class PortfolioInfolist
                 
                 Section::make('Informasi Lainnya')
                     ->schema([
+                        // Waktu create record
                         TextEntry::make('created_at')
                             ->label('Dibuat')
                             ->dateTime('d F Y, H:i'),
-                        
+                         // Waktu update record
                         TextEntry::make('updated_at')
                             ->label('Diperbarui')
                             ->dateTime('d F Y, H:i'),

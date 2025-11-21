@@ -15,41 +15,43 @@ class ServiceForm
     {
         return $schema
             ->components([
+                // Bagian utama form dalam satu Section
                 Section::make()
                     ->schema([
+                         // Input nama layanan
                         TextInput::make('name')
                             ->label('Nama Layanan')
-                            ->required()
-                            ->maxLength(255),
-                        
+                            ->required() // wajib diisi
+                            ->maxLength(255), // batas panjang teks
+                         // Input deskripsi layanan
                         Textarea::make('description')
                             ->label('Deskripsi')
                             ->required()
                             ->rows(4)
                             ->columnSpanFull(),
-                        
+                        // Input harga layanan (angka)
                         TextInput::make('price')
                             ->label('Harga')
                             ->required()
                             ->numeric()
                             ->prefix('Rp')
                             ->maxValue(999999999999.99),
-                        
+                        // Input durasi pengerjaan
                         TextInput::make('duration')
                             ->label('Durasi Pengerjaan')
                             ->required()
                             ->maxLength(255)
                             ->placeholder('contoh: 2-3 minggu'),
-                        
+                        // Upload gambar layanan
                         FileUpload::make('image')
                             ->label('Gambar')
-                            ->image()
+                            ->image() // memastikan file adalah gambar
                             ->directory('services')
                             ->columnSpanFull(),
-                        
+                        // Toggle status aktif/tidak
                         Toggle::make('is_active')
                             ->label('Status Aktif')
-                            ->default(true),
+                            ->default(true), // nilai default aktif
                     ])
                     ->columns(2),
             ]);

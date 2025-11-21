@@ -19,6 +19,7 @@ class PortfoliosTable
     {
         return $table
             ->columns([
+                 // Nama Proyek 
                 TextColumn::make('project_name')
                     ->label('Nama Proyek')
                     ->searchable()
@@ -26,17 +27,20 @@ class PortfoliosTable
                     ->weight('bold')
                     ->wrap(),
 
+                // Nama klien
                 TextColumn::make('client_name')
                     ->label('Nama Klien')
                     ->searchable()
                     ->sortable(),
 
+                // Lokasi proyek + icon map
                 TextColumn::make('location')
                     ->label('Lokasi')
                     ->searchable()
                     ->icon('heroicon-o-map-pin')
-                    ->toggleable(),
+                    ->toggleable(), // bisa disembunyikan dari table
 
+                // Kategori proyek dengan badge warna
                 TextColumn::make('category')
                     ->label('Kategori')
                     ->badge()
@@ -53,11 +57,13 @@ class PortfoliosTable
                     ->sortable()
                     ->searchable(),
 
+                // Tanggal selesai
                 TextColumn::make('completion_date')
                     ->label('Tanggal Selesai')
                     ->date('d F Y')
                     ->sortable(),
 
+                // Deskripsi 
                 TextColumn::make('description')
                     ->label('Deskripsi')
                     ->limit(50)
@@ -77,6 +83,7 @@ class PortfoliosTable
                     ->toggleable(isToggledHiddenByDefault: true),
             ])
             ->filters([
+                // Filter berdasarkan kategori
                 SelectFilter::make('category')
                     ->label('Kategori')
                     ->options([
@@ -90,6 +97,7 @@ class PortfoliosTable
                     ])
                     ->multiple(),
 
+                // Filter berdasarkan rentang tanggal selesai
                 Filter::make('completion_date')
                     ->form([
                         DatePicker::make('completed_from')
@@ -110,14 +118,14 @@ class PortfoliosTable
                     }),
             ])
             ->recordActions([
-                ViewAction::make(),
-                EditAction::make(),
+                ViewAction::make(), // lihat detail
+                EditAction::make(), // edit
             ])
             ->toolbarActions([
                 BulkActionGroup::make([
                     DeleteBulkAction::make(),
                 ]),
             ])
-            ->defaultSort('completion_date', 'desc');
+            ->defaultSort('completion_date', 'desc'); // terbaru muncul di atas
     }
 }

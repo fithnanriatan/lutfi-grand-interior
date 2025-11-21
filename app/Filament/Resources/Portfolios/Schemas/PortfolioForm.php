@@ -13,40 +13,43 @@ use Filament\Schemas\Schema;
 
 class PortfolioForm
 {
+    // Mengatur struktur dan komponen form untuk input data portfolio
     public static function configure(Schema $schema): Schema
     {
         return $schema
             ->components([
+                //Bagian utama yang berisi informasi detail
                 Section::make('Informasi Proyek')
                     ->schema([
+                         // Nama proyek yang dikerjakan
                         TextInput::make('project_name')
                             ->label('Nama Proyek')
                             ->required()
                             ->maxLength(255)
                             ->columnSpanFull(),
-                        
+                         // Deskripsi lengkap proyek
                         Textarea::make('description')
                             ->label('Deskripsi')
                             ->required()
                             ->rows(4)
                             ->columnSpanFull(),
-                        
+                        // Nama klien yang memesan proyek
                         TextInput::make('client_name')
                             ->label('Nama Klien')
                             ->required()
                             ->maxLength(255),
-                        
+                        // Lokasi proyek
                         TextInput::make('location')
                             ->label('Lokasi')
                             ->required()
                             ->maxLength(255),
-                        
+                         // Tanggal proyek diselesaikan
                         DatePicker::make('completion_date')
                             ->label('Tanggal Selesai')
                             ->required()
                             ->native(false)
                             ->displayFormat('d F Y'),
-                        
+                         // Kategori proyek interior
                         Select::make('category')
                             ->label('Kategori')
                             ->options([
@@ -65,15 +68,16 @@ class PortfolioForm
                 
                 Section::make('Media')
                     ->schema([
+                        //upload gambar
                         FileUpload::make('images')
                             ->label('Gambar Proyek')
                             ->image()
                             ->multiple()
-                            ->directory('portfolios')
+                            ->directory('portfolios') //disimpan di storage/app/public/portfolios
                             ->maxFiles(10)
                             ->reorderable()
                             ->columnSpanFull(),
-                        
+                        // Menandai proyek sebagai featured 
                         Toggle::make('is_featured')
                             ->label('Tampilkan sebagai Featured')
                             ->default(false)

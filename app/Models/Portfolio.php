@@ -9,6 +9,7 @@ class Portfolio extends Model
 {
     use HasFactory;
 
+    //Kolom yang boleh diisi secara
     protected $fillable = [
         'project_name',
         'description',
@@ -20,6 +21,7 @@ class Portfolio extends Model
         'is_featured',
     ];
 
+    //Casting otomatis untuk atribut tertentu
     protected $casts = [
         'completion_date' => 'date',
         'images' => 'array',
