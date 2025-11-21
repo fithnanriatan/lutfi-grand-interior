@@ -15,26 +15,30 @@ use Filament\Tables\Filters\Filter;
 
 class BookingsTable
 {
+    // Mengatur tampilan tabel data booking di halaman index 
     public static function configure(Table $table): Table
     {
         return $table
             ->columns([
+                //Kolom: Layanan Interior
                 TextColumn::make('service.name')
                     ->label('Layanan Interior')
                     ->searchable()
                     ->sortable()
                     ->weight('bold'),
-
+                    //Kolom: Nama Pelanggan
                 TextColumn::make('customer_name')
                     ->label('Nama Pelanggan')
                     ->searchable()
                     ->sortable(),
 
+                    //Kolom: tanggal booking
                 TextColumn::make('booking_date')
                     ->label('Tanggal Booking')
                     ->date('d F Y')
                     ->sortable(),
 
+                    //Kolom: Status Booking
                 TextColumn::make('status')
                     ->label('Status')
                     ->badge()
@@ -65,8 +69,10 @@ class BookingsTable
                     ->dateTime('d M Y H:i')
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
-            ])
+            ]) //Digunakan untuk memfilter tabel berdasarkan status, layanan,
+            //  dan rentang tanggal booking.
             ->filters([
+                // Filter berdasarkan status booking
                 SelectFilter::make('status')
                     ->label('Status')
                     ->options([
@@ -76,7 +82,8 @@ class BookingsTable
                         'completed' => 'Selesai',
                         'cancelled' => 'Dibatalkan',
                     ])
-                    ->multiple(),
+                    ->multiple(), // bisa pilih lebih dari satu status
+
 
                 SelectFilter::make('service_id')
                     ->label('Layanan')
@@ -112,6 +119,7 @@ class BookingsTable
                     DeleteBulkAction::make(),
                 ]),
             ])
+            // Default sorting berdasarkan tanggal booking terbaru
             ->defaultSort('booking_date', 'desc');
     }
 }

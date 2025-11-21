@@ -10,6 +10,7 @@ class Review extends Model
 {
     use HasFactory;
 
+    // Field yang boleh diisi
     protected $fillable = [
         'booking_id',
         'customer_name',
@@ -19,11 +20,13 @@ class Review extends Model
         'is_approved',
     ];
 
+    // Casting untuk mengubah field menjadi tipe data tertentu
     protected $casts = [
         'rating' => 'integer',
         'is_approved' => 'boolean',
     ];
 
+    // Relasi: 1 booking dimiliki oleh 1 service
     public function booking(): BelongsTo
     {
         return $this->belongsTo(Booking::class);

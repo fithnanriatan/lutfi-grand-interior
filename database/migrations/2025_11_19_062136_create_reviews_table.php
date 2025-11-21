@@ -6,20 +6,24 @@ use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
 {
+    // Membuat tabel "reviews".
     public function up(): void
     {
         Schema::create('reviews', function (Blueprint $table) {
-            $table->id();
-            $table->foreignId('booking_id')->nullable()->constrained()->onDelete('set null');
-            $table->string('customer_name');
-            $table->string('customer_email')->nullable();
-            $table->integer('rating'); // 1-5
-            $table->text('comment');
-            $table->boolean('is_approved')->default(false);
-            $table->timestamps();
+            $table->id(); // Primary key
+            $table->foreignId('booking_id')->nullable()->constrained()->onDelete('set null'); // Relasi ke tabel bookings (opsional).
+            // Jika booking dihapus, nilai booking_id menjadi null.
+
+            $table->string('customer_name'); // Nama pelanggan yang memberi review
+            $table->string('customer_email')->nullable(); // Email pelanggan (boleh kosong)
+            $table->integer('rating'); //  rate 1-5
+            $table->text('comment'); // Isi ulasan dari pelanggan
+            $table->boolean('is_approved')->default(false); // Status review disetujui admin atau tidak 
+            $table->timestamps(); 
         });
     }
 
+    //Menghapus tabel "reviews".
     public function down(): void
     {
         Schema::dropIfExists('reviews');

@@ -11,6 +11,7 @@ class Booking extends Model
 {
     use HasFactory;
 
+    //Daftar kolom yang boleh diisi secara bersamaan
     protected $fillable = [
         'service_id',
         'customer_name',
@@ -22,6 +23,7 @@ class Booking extends Model
         'notes',
     ];
 
+    //Relasi: Booking -> Service (many to one)
     protected $casts = [
         'booking_date' => 'date',
     ];
@@ -31,6 +33,7 @@ class Booking extends Model
         return $this->belongsTo(Service::class);
     }
 
+    //Relasi: Booking -> Review (one to one)
     public function review(): HasOne
     {
         return $this->hasOne(Review::class);

@@ -18,44 +18,45 @@ class ServicesTable
     {
         return $table
             ->columns([
+                // Kolom gambar layanan (thumbnail)
                 ImageColumn::make('image')
                     ->label('Gambar')
                     ->circular()
                     ->defaultImageUrl(url('/images/placeholder.png')),
-                
+                 // Nama layanan (judul utama)
                 TextColumn::make('name')
                     ->label('Nama Layanan')
                     ->searchable()
                     ->sortable()
                     ->weight('bold'),
-                
+                // Deskripsi singkat 
                 TextColumn::make('description')
                     ->label('Deskripsi')
                     ->limit(50)
                     ->wrap()
-                    ->toggleable(),
-                
+                    ->toggleable(), // bisa disembunyikan dari kolom tabel
+                // Harga layanan
                 TextColumn::make('price')
                     ->label('Harga')
                     ->money('IDR')
                     ->sortable(),
-                
+                // Durasi pengerjaan
                 TextColumn::make('duration')
                     ->label('Durasi')
                     ->searchable()
                     ->badge()
                     ->color('info'),
-                
+                // Status aktif/non-aktif
                 ToggleColumn::make('is_active')
                     ->label('Status')
                     ->sortable(),
-                
+                // Tanggal dibuat
                 TextColumn::make('created_at')
                     ->label('Dibuat')
                     ->dateTime('d M Y')
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
-                
+                // Tanggal diperbarui
                 TextColumn::make('updated_at')
                     ->label('Diperbarui')
                     ->dateTime('d M Y')
@@ -75,7 +76,7 @@ class ServicesTable
             ])
             ->toolbarActions([
                 BulkActionGroup::make([
-                    DeleteBulkAction::make(),
+                    DeleteBulkAction::make(), // hapus banyak sekaligus
                 ]),
             ])
             ->defaultSort('created_at', 'desc');

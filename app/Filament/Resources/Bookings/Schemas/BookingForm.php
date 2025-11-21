@@ -11,25 +11,28 @@ use Filament\Schemas\Schema;
 
 class BookingForm
 {
+    //Fungsi utama untuk mengatur schema form Booking
     public static function configure(Schema $schema): Schema
     {
         return $schema
             ->components([
+                //isi informasi layanan
                 Section::make('Informasi Layanan')
                     ->schema([
+                        //dropdown
                         Select::make('service_id')
                             ->label('Layanan Interior')
-                            ->relationship('service', 'name')
+                            ->relationship('service', 'name') //relasi tabel
                             ->required()
                             ->searchable()
                             ->preload(),
-                        
+                        //input tgl
                         DatePicker::make('booking_date')
                             ->label('Tanggal Booking')
                             ->required()
                             ->native(false)
                             ->displayFormat('d F Y'),
-                        
+                        //pilihan status
                         Select::make('status')
                             ->label('Status')
                             ->options([
@@ -42,21 +45,22 @@ class BookingForm
                             ->required()
                             ->default('pending'),
                     ])
-                    ->columns(3),
-                
+                    ->columns(3),//frorm di bagi menjadi 3
+                //data pelanggan
                 Section::make('Informasi Pelanggan')
                     ->schema([
+                        //nama pelanggan
                         TextInput::make('customer_name')
                             ->label('Nama Pelanggan')
                             ->required()
                             ->maxLength(255),
-                        
+                        //email pelanggan
                         TextInput::make('customer_email')
                             ->label('Email')
                             ->email()
                             ->required()
                             ->maxLength(255),
-                        
+                        //no tlp pelanggan
                         TextInput::make('customer_phone')
                             ->label('No. Telepon')
                             ->tel()
@@ -70,7 +74,7 @@ class BookingForm
                             ->columnSpanFull(),
                     ])
                     ->columns(2),
-                
+                //nambah catatan 
                 Section::make('Catatan')
                     ->schema([
                         Textarea::make('notes')

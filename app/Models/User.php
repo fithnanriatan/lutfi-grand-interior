@@ -29,8 +29,8 @@ class User extends Authenticatable
      * @var list<string>
      */
     protected $hidden = [
-        'password',
-        'remember_token',
+        'password', // Jangan tampilkan password
+        'remember_token', // Token remember me
     ];
 
     /**
@@ -41,8 +41,8 @@ class User extends Authenticatable
     protected function casts(): array
     {
         return [
-            'email_verified_at' => 'datetime',
-            'password' => 'hashed',
+            'email_verified_at' => 'datetime', // Format tanggal verifikasi email
+            'password' => 'hashed', // Password otomatis di-hash
         ];
     }
 }
