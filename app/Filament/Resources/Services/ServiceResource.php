@@ -31,6 +31,7 @@ class ServiceResource extends Resource
     public static function form(Schema $schema): Schema
     {
         return ServiceForm::configure($schema);
+        
     }
 
     public static function infolist(Schema $schema): Schema

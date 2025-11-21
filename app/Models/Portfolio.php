@@ -26,5 +26,6 @@ class Portfolio extends Model
         'completion_date' => 'date',
         'images' => 'array',
         'is_featured' => 'boolean',
+        'images' => 'array',
     ];
 }

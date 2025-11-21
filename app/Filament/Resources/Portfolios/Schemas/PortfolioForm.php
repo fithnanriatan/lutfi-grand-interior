@@ -21,13 +21,13 @@ class PortfolioForm
                 //Bagian utama yang berisi informasi detail
                 Section::make('Informasi Proyek')
                     ->schema([
-                         // Nama proyek yang dikerjakan
+                        // Nama proyek yang dikerjakan
                         TextInput::make('project_name')
                             ->label('Nama Proyek')
                             ->required()
                             ->maxLength(255)
                             ->columnSpanFull(),
-                         // Deskripsi lengkap proyek
+                        // Deskripsi lengkap proyek
                         Textarea::make('description')
                             ->label('Deskripsi')
                             ->required()
@@ -43,13 +43,13 @@ class PortfolioForm
                             ->label('Lokasi')
                             ->required()
                             ->maxLength(255),
-                         // Tanggal proyek diselesaikan
+                        // Tanggal proyek diselesaikan
                         DatePicker::make('completion_date')
                             ->label('Tanggal Selesai')
                             ->required()
                             ->native(false)
                             ->displayFormat('d F Y'),
-                         // Kategori proyek interior
+                        // Kategori proyek interior
                         Select::make('category')
                             ->label('Kategori')
                             ->options([
@@ -65,7 +65,7 @@ class PortfolioForm
                             ->searchable(),
                     ])
                     ->columns(2),
-                
+
                 Section::make('Media')
                     ->schema([
                         //upload gambar
@@ -76,6 +76,11 @@ class PortfolioForm
                             ->directory('portfolios') //disimpan di storage/app/public/portfolios
                             ->maxFiles(10)
                             ->reorderable()
+                            ->multiple()            // <--- Agar bisa upload banyak
+                            ->disk('public')
+                            ->directory('portfolios')
+                            ->reorderable()
+                            ->appendFiles()
                             ->columnSpanFull(),
                         // Menandai proyek sebagai featured 
                         Toggle::make('is_featured')

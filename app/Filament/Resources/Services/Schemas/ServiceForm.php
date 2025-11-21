@@ -18,12 +18,12 @@ class ServiceForm
                 // Bagian utama form dalam satu Section
                 Section::make()
                     ->schema([
-                         // Input nama layanan
+                        // Input nama layanan
                         TextInput::make('name')
                             ->label('Nama Layanan')
                             ->required() // wajib diisi
                             ->maxLength(255), // batas panjang teks
-                         // Input deskripsi layanan
+                        // Input deskripsi layanan
                         Textarea::make('description')
                             ->label('Deskripsi')
                             ->required()
@@ -47,7 +47,12 @@ class ServiceForm
                             ->label('Gambar')
                             ->image() // memastikan file adalah gambar
                             ->directory('services')
-                            ->columnSpanFull(),
+                            ->columnSpanFull()
+                            ->image() // Memastikan hanya boleh upload gambar
+                            ->disk('public') // <--- WAJIB DITAMBAHKAN AGAR GAMBAR MUNCUL
+                            ->directory('services') // Folder penyimpanan (opsional)
+                            ->visibility('public') // Memastikan file bisa diakses browser
+                            ->required(),
                         // Toggle status aktif/tidak
                         Toggle::make('is_active')
                             ->label('Status Aktif')
