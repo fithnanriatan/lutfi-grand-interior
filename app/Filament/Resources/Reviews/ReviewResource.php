@@ -24,6 +24,8 @@ class ReviewResource extends Resource
 
     protected static ?string $recordTitleAttribute = 'customer_name';
 
+    protected static ?int $navigationSort = 4;
+
     public static function form(Schema $schema): Schema
     {
         return ReviewForm::configure($schema);

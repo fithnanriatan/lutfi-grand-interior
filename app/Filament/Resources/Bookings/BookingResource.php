@@ -25,6 +25,8 @@ class BookingResource extends Resource
     protected static ?string $recordTitleAttribute = 'customer_name';
     
     protected static ?string $navigationLabel = 'Pemesanan';
+
+    protected static ?int $navigationSort = 2;
     
     protected static ?string $modelLabel = 'Pemesanan';
 

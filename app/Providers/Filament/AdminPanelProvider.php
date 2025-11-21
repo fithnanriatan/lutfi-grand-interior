@@ -28,6 +28,7 @@ class AdminPanelProvider extends PanelProvider
             ->id('admin')
             ->path('admin')
             ->login()
+            ->brandName('Lutfi Grand Interior')
             ->colors([
                 'primary' => Color::Amber,
             ])

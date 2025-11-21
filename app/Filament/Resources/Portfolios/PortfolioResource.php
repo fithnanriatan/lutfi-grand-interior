@@ -25,6 +25,8 @@ class PortfolioResource extends Resource
     protected static ?string $recordTitleAttribute = 'project_name';
     
     protected static ?string $navigationLabel = 'Portfolio';
+
+    protected static ?int $navigationSort = 3;
     
     protected static ?string $modelLabel = 'Portfolio';
 

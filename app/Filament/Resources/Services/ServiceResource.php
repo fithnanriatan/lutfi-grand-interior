@@ -25,6 +25,8 @@ class ServiceResource extends Resource
     protected static ?string $recordTitleAttribute = 'name';
     
     protected static ?string $navigationLabel = 'Layanan Interior';
+
+    protected static ?int $navigationSort = 1;
     
     protected static ?string $modelLabel = 'Layanan Interior';
 
