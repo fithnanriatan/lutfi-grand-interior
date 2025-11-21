@@ -76,19 +76,19 @@
         <div class="container mx-auto px-6">
             <div class="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
                 <div>
-                    <div class="text-4xl font-bold text-purple-600 mb-2">500+</div>
+                    <div class="text-4xl font-bold text-purple-600 mb-2">100+</div>
                     <div class="text-gray-600">Proyek Selesai</div>
                 </div>
                 <div>
-                    <div class="text-4xl font-bold text-purple-600 mb-2">450+</div>
+                    <div class="text-4xl font-bold text-purple-600 mb-2">100+</div>
                     <div class="text-gray-600">Klien Puas</div>
                 </div>
                 <div>
-                    <div class="text-4xl font-bold text-purple-600 mb-2">15+</div>
+                    <div class="text-4xl font-bold text-purple-600 mb-2">6+</div>
                     <div class="text-gray-600">Tahun Pengalaman</div>
                 </div>
                 <div>
-                    <div class="text-4xl font-bold text-purple-600 mb-2">50+</div>
+                    <div class="text-4xl font-bold text-purple-600 mb-2">5</div>
                     <div class="text-gray-600">Desainer Profesional</div>
                 </div>
             </div>
@@ -160,11 +160,11 @@
             <div class="grid md:grid-cols-3 gap-8">
                 <!-- Portfolio Item 1 -->
                 <div class="relative overflow-hidden rounded-lg shadow-lg card-hover group">
-                    <img src="https://images.unsplash.com/photo-1600210492486-724fe5c67fb0?w=600" alt="Modern Living Room" class="w-full h-64 object-cover">
+                    <img src="https://media.dekoruma.com/design-and-build/projects/132967/files/LIVING_DETAIL(5fcb7d36-69ce-47dd-8039-b412745f53b5).JPG" alt="Modern Living Room" class="w-full h-64 object-cover">
                     <div class="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300">
                         <div class="absolute bottom-0 left-0 right-0 p-6 text-white">
                             <h3 class="text-xl font-bold mb-2">Modern Living Room</h3>
-                            <p class="text-sm">Residential • Jakarta</p>
+                            <p class="text-sm">Residential • Semarang</p>
                         </div>
                     </div>
                 </div>
@@ -175,18 +175,18 @@
                     <div class="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300">
                         <div class="absolute bottom-0 left-0 right-0 p-6 text-white">
                             <h3 class="text-xl font-bold mb-2">Minimalist Bedroom</h3>
-                            <p class="text-sm">Residential • Bandung</p>
+                            <p class="text-sm">Residential • Batang</p>
                         </div>
                     </div>
                 </div>
 
                 <!-- Portfolio Item 3 -->
                 <div class="relative overflow-hidden rounded-lg shadow-lg card-hover group">
-                    <img src="https://images.unsplash.com/photo-1600566753190-17f0baa2a6c3?w=600" alt="Modern Kitchen" class="w-full h-64 object-cover">
+                    <img src="https://media.dekoruma.com/design-and-build/portfolio/style/Modern%20Kontemporer.jpg?auto=webp&dpr=1&optimize=high&quality=20" alt="Modern Kitchen" class="w-full h-64 object-cover">
                     <div class="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300">
                         <div class="absolute bottom-0 left-0 right-0 p-6 text-white">
                             <h3 class="text-xl font-bold mb-2">Modern Kitchen</h3>
-                            <p class="text-sm">Residential • Surabaya</p>
+                            <p class="text-sm">Residential • Batang</p>
                         </div>
                     </div>
                 </div>
@@ -197,29 +197,29 @@
                     <div class="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300">
                         <div class="absolute bottom-0 left-0 right-0 p-6 text-white">
                             <h3 class="text-xl font-bold mb-2">Modern Office</h3>
-                            <p class="text-sm">Commercial • Jakarta</p>
+                            <p class="text-sm">Commercial • Batang</p>
                         </div>
                     </div>
                 </div>
 
                 <!-- Portfolio Item 5 -->
                 <div class="relative overflow-hidden rounded-lg shadow-lg card-hover group">
-                    <img src="https://images.unsplash.com/photo-1559329007-40df8a9345d8?w=600" alt="Cozy Cafe" class="w-full h-64 object-cover">
+                    <img src="https://cpanel-blog.smsperkasa.com/wp-content/uploads/2022/12/Konsep-Cafe-Industrial.jpg" alt="Cozy Cafe" class="w-full h-64 object-cover">
                     <div class="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300">
                         <div class="absolute bottom-0 left-0 right-0 p-6 text-white">
                             <h3 class="text-xl font-bold mb-2">Cozy Cafe</h3>
-                            <p class="text-sm">F&B • Yogyakarta</p>
+                            <p class="text-sm">F&B • Kudus</p>
                         </div>
                     </div>
                 </div>
 
                 <!-- Portfolio Item 6 -->
                 <div class="relative overflow-hidden rounded-lg shadow-lg card-hover group">
-                    <img src="https://images.unsplash.com/photo-1600607687644-c7171b42498b?w=600" alt="Luxury Bathroom" class="w-full h-64 object-cover">
+                    <img src="https://media.dekoruma.com/article/2024/07/11204655/1-10.png?resize=800%2C600&ssl=1" alt="Luxury Bathroom" class="w-full h-64 object-cover">
                     <div class="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300">
                         <div class="absolute bottom-0 left-0 right-0 p-6 text-white">
-                            <h3 class="text-xl font-bold mb-2">Luxury Bathroom</h3>
-                            <p class="text-sm">Residential • Bali</p>
+                            <h3 class="text-xl font-bold mb-2">PvC Minimalist</h3>
+                            <p class="text-sm">Pvc • Semarang</p>
                         </div>
                     </div>
                 </div>
@@ -342,7 +342,7 @@
                             </div>
                             <div>
                                 <div class="font-semibold">Alamat</div>
-                                <div class="text-gray-600">Jl. Raya Contoh No. 123, Jakarta Selatan 12345</div>
+                                <div class="text-gray-600">Jl. Tersono Timbang Km2,5 Desa/Kelurahan Kranggan Kab.Batang</div>
                             </div>
                         </div>
                         <div class="flex items-start">
@@ -351,7 +351,7 @@
                             </div>
                             <div>
                                 <div class="font-semibold">Telepon</div>
-                                <div class="text-gray-600">+62 812-3456-7890</div>
+                                <div class="text-gray-600">+62 831-5710-0105</div>
                             </div>
                         </div>
                         <div class="flex items-start">
@@ -360,7 +360,7 @@
                             </div>
                             <div>
                                 <div class="font-semibold">Email</div>
-                                <div class="text-gray-600">info@lutfigrandinterior.com</div>
+                                <div class="text-gray-600">Fuadlutfi63@yahoo.co.id</div>
                             </div>
                         </div>
                         <div class="flex items-start">
@@ -369,8 +369,8 @@
                             </div>
                             <div>
                                 <div class="font-semibold">Jam Operasional</div>
-                                <div class="text-gray-600">Senin - Sabtu: 09:00 - 18:00</div>
-                                <div class="text-gray-600">Minggu: Libur</div>
+                                <div class="text-gray-600">Setiap Hari: 08:00 - 16:00</div>
+                                <div class="text-gray-600">Jumat: Libur</div>
                             </div>
                         </div>
                     </div>
