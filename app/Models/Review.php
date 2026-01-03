@@ -27,14 +27,14 @@ class Review extends Model
     }
 
     // Helper untuk star rating HTML
-    public function getStarRatingAttribute()
+   public function getStarRatingAttribute()
     {
         $stars = '';
         for ($i = 1; $i <= 5; $i++) {
             if ($i <= $this->rating) {
-                $stars .= '<i class="bi bi-star-fill text-warning"></i>';
+                $stars .= '<i class="fa-solid fa-star text-warning"></i>';
             } else {
-                $stars .= '<i class="bi bi-star text-warning"></i>';
+                $stars .= '<i class="fa-solid fa-star text-muted" style="opacity: 0.3;"></i>';
             }
         }
         return $stars;

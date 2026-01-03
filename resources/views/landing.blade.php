@@ -1,41 +1,206 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dashboard - Mazer Admin Dashboard</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="author" content="Untree.co">
+    <link rel="shortcut icon" href="{{ asset('untree/favicon.png') }}">
 
-    <link rel="shortcut icon"
-        href="data:image/svg+xml,%3csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%2033%2034'%20fill-rule='evenodd'%20stroke-linejoin='round'%20stroke-miterlimit='2'%20xmlns:v='https://vecta.io/nano'%3e%3cpath%20d='M3%2027.472c0%204.409%206.18%205.552%2013.5%205.552%207.281%200%2013.5-1.103%2013.5-5.513s-6.179-5.552-13.5-5.552c-7.281%200-13.5%201.103-13.5%205.513z'%20fill='%23435ebe'%20fill-rule='nonzero'/%3e%3ccircle%20cx='16.5'%20cy='8.8'%20r='8.8'%20fill='%2341bbdd'/%3e%3c/svg%3e"
-        type="image/x-icon">
-    <link rel="shortcut icon"
-        href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACEAAAAiCAYAAADRcLDBAAAEs2lUWHRYTUw6Y29tLmFkb2JlLnhtcAAAAAAAPD94cGFja2V0IGJlZ2luPSLvu78iIGlkPSJXNU0wTXBDZWhpSHpyZVN6TlRjemtjOWQiPz4KPHg6eG1wbWV0YSB4bWxuczp4PSJhZG9iZTpuczptZXRhLyIgeDp4bXB0az0iWE1QIENvcmUgNS41LjAiPgogPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4KICA8cmRmOkRlc2NyaXB0aW9uIHJkZjphYm91dD0iIgogICAgeG1sbnM6ZXhpZj0iaHR0cDovL25zLmFkb2JlLmNvbS9leGlmLzEuMC8iCiAgICB4bWxuczp0aWZmPSJodHRwOi8vbnMuYWRvYmUuY29tL3RpZmYvMS4wLyIKICAgIHhtbG5zOnBob3Rvc2hvcD0iaHR0cDovL25zLmFkb2JlLmNvbS9waG90b3Nob3AvMS4wLyIKICAgIHhtbG5zOnhtcD0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wLyIKICAgIHhtbG5zOnhtcE1NPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvbW0vIgogICAgeG1sbnM6c3RFdnQ9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9zVHlwZS9SZXNvdXJjZUV2ZW50IyIKICAgZXhpZjpQaXhlbFhEaW1lbnNpb249IjMzIgogICBleGlmOlBpeGVsWURpbWVuc2lvbj0iMzQiCiAgIGV4aWY6Q29sb3JTcGFjZT0iMSIKICAgdGlmZjpJbWFnZVdpZHRoPSIzMyIKICAgdGlmZjpJbWFnZUxlbmd0aD0iMzQiCiAgIHRpZmY6UmVzb2x1dGlvblVuaXQ9IjIiCiAgIHRpZmY6WFJlc29sdXRpb249Ijk2LjAiCiAgIHRpZmY6WVJlc29sdXRpb249Ijk2LjAiCiAgIHBob3Rvc2hvcDpDb2xvck1vZGU9IjMiCiAgIHBob3Rvc2hvcDpJQ0NQcm9maWxlPSJzUkdCIElFQzYxOTY2LTIuMSIKICAgeG1wOk1vZGlmeURhdGU9IjIwMjItMDMtMzFUMTA6NTA6MjMrMDI6MDAiCiAgIHhtcDpNZXRhZGF0YURhdGU9IjIwMjItMDMtMzFUMTA6NTA6MjMrMDI6MDAiPgogICA8eG1wTU06SGlzdG9yeT4KICAgIDxyZGY6U2VxPgogICAgIDxyZGY6bGkKICAgICAgc3RFdnQ6YWN0aW9uPSJwcm9kdWNlZCIKICAgICAgc3RFdnQ6c29mdHdhcmVBZ2VudD0iQWZmaW5pdHkgRGVzaWduZXIgMS4xMC4xIgogICAgICBzdEV2dDp3aGVuPSIyMDIyLTAzLTMxVDEwOjUwOjIzKzAyOjAwIi8+CiAgICA8L3JkZjpTZXE+CiAgIDwveG1wTU06SGlzdG9yeT4KICA8L3JkZjpEZXNjcmlwdGlvbj4KIDwvcmRmOlJERj4KPC94OnhtcG1ldGE+Cjw/eHBhY2tldCBlbmQ9InIiPz5V57uAAAABgmlDQ1BzUkdCIElFQzYxOTY2LTIuMQAAKJF1kc8rRFEUxz9maORHo1hYKC9hISNGTWwsRn4VFmOUX5uZZ36oeTOv954kW2WrKLHxa8FfwFZZK0WkZClrYoOe87ypmWTO7dzzud97z+nec8ETzaiaWd4NWtYyIiNhZWZ2TvE946WZSjqoj6mmPjE1HKWkfdxR5sSbgFOr9Ll/rXoxYapQVik8oOqGJTwqPL5i6Q5vCzeo6dii8KlwpyEXFL519LjLLw6nXP5y2IhGBsFTJ6ykijhexGra0ITl5bRqmWU1fx/nJTWJ7PSUxBbxJkwijBBGYYwhBgnRQ7/MIQIE6ZIVJfK7f/MnyUmuKrPOKgZLpEhj0SnqslRPSEyKnpCRYdXp/9++msneoFu9JgwVT7b91ga+LfjetO3PQ9v+PgLvI1xkC/m5A+h7F32zoLXug38dzi4LWnwHzjeg8UGPGbFfySvuSSbh9QRqZ6H+Gqrm3Z7l9zm+h+iafNUV7O5Bu5z3L/wAdthn7QIme0YAAAAJcEhZcwAADsQAAA7EAZUrDhsAAAJTSURBVFiF7Zi9axRBGIefEw2IdxFBRQsLWUTBaywSK4ubdSGVIY1Y6HZql8ZKCGIqwX/AYLmCgVQKfiDn7jZeEQMWfsSAHAiKqPiB5mIgELWYOW5vzc3O7niHhT/YZvY37/swM/vOzJbIqVq9uQ04CYwCI8AhYAlYAB4Dc7HnrOSJWcoJcBS4ARzQ2F4BZ2LPmTeNuykHwEWgkQGAet9QfiMZjUSt3hwD7psGTWgs9pwH1hC1enMYeA7sKwDxBqjGnvNdZzKZjqmCAKh+U1kmEwi3IEBbIsugnY5avTkEtIAtFhBrQCX2nLVehqyRqFoCAAwBh3WGLAhbgCRIYYinwLolwLqKUwwi9pxV4KUlxKKKUwxC6ZElRCPLYAJxGfhSEOCz6m8HEXvOB2CyIMSk6m8HoXQTmMkJcA2YNTHm3congOvATo3tE3A29pxbpnFzQSiQPcB55IFmFNgFfEQeahaAGZMpsIJIAZWAHcDX2HN+2cT6r39GxmvC9aPNwH5gO1BOPFuBVWAZue0vA9+A12EgjPadnhCuH1WAE8ivYAQ4ohKaagV4gvxi5oG7YSA2vApsCOH60WngKrA3R9IsvQUuhIGY00K4flQG7gHH/mLytB4C42EgfrQb0mV7us8AAMeBS8mGNMR4nwHamtBB7B4QRNdaS0M8GxDEog7iyoAguvJ0QYSBuAOcAt71Kfl7wA8DcTvZ2KtOlJEr+ByyQtqqhTyHTIeB+ONeqi3brh+VgIN0fohUgWGggizZFTplu12yW8iy/YLOGWMpDMTPXnl+Az9vj2HERYqPAAAAAElFTkSuQmCC"
-        type="image/png">
+    <meta name="description" content="" />
+    <meta name="keywords" content="bootstrap, bootstrap4" />
 
+    <link href="{{ asset('untree/css/bootstrap.min.css') }}" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <link href="{{ asset('untree/css/tiny-slider.css') }}" rel="stylesheet">
+    <link href="{{ asset('untree/css/style.css') }}" rel="stylesheet">
+    <title>Lutfi Grand Interior</title>
+    <style>
+        /* Custom Styling khusus Halaman Login agar lebih Premium */
+        #auth-left {
+            /* Membuat form berada di tengah secara vertikal */
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            height: 100vh;
+            padding: 2rem 4rem;
+            /* Memberi ruang napas yang lega */
+        }
 
-    <link rel="stylesheet" crossorigin href="{{ asset('mazer/compiled/css/app.css') }}">
-    <link rel="stylesheet" crossorigin href="{{ asset('mazer/compiled/css/app-dark.css') }}">
-    <link rel="stylesheet" crossorigin href="{{ asset('mazer/compiled/css/iconly.css') }}">
+        #auth-right {
+            /* Mengisi sisi kanan dengan gambar Interior */
+            /* Ganti URL ini dengan gambar interior terbaik Anda nanti */
+            background: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)), url('https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?q=80&w=2000&auto=format&fit=crop');
+            background-size: cover;
+            background-position: center;
+            height: 100vh;
+        }
+
+        .auth-title {
+            font-size: 2.5rem;
+            color: #2c3e50;
+            /* Warna gelap elegan */
+        }
+
+        .btn-primary {
+            /* Menyesuaikan tombol agar senada dengan tema interior (misal: nuansa biru/emas/abu) */
+            background-color: #435ebe;
+            border-color: #435ebe;
+            padding: 0.8rem 2rem;
+            font-weight: 600;
+        }
+
+        .form-control-xl {
+            padding: 0.8rem 1rem;
+            font-size: 1rem;
+        }
+
+        /* Responsif untuk layar kecil */
+        @media (max-width: 767px) {
+            #auth-left {
+                padding: 2rem;
+            }
+        }
+    </style>
 </head>
 
 <body>
 
-    <h1>Welcome</h1>
+    <nav class="custom-navbar navbar navbar navbar-expand-md navbar-dark bg-dark" arial-label="Furni navigation bar">
+        <div class="container">
+            <a class="navbar-brand" href="{{ asset('untree/index.html') }}">Lutfi Grand Interior<span>.</span></a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarsFurni"
+                aria-controls="navbarsFurni" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navbarsFurni">
+                <ul class="custom-navbar-nav navbar-nav ms-auto mb-2 mb-md-0">
+                    <li class="nav-item active"><a class="nav-link" href="#home">Home</a></li>
+                    <li><a class="nav-link" href="#services">Layanan</a></li>
+                    <li><a class="nav-link" href="#portfolio">Portfolio</a></li>
+                    <li><a class="nav-link" href="#contact">Kontak</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <div class="hero" id="home">
+        <div class="container">
+            <div class="row justify-content-between">
+                <div class="col-lg-5">
+                    <div class="intro-excerpt">
+                        <h1>Wujudkan Ruang <span class="d-block">Impian Anda</span></h1>
+                        <p class="mb-4">Kami mengubah rumah biasa menjadi hunian dengan estetika tinggi dan
+                            fungsionalitas maksimal. Desain interior profesional untuk kenyamanan hidup Anda.</p>
+                        <p><a href="#portfolio" class="btn btn-secondary me-2">Lihat Karya Kami</a><a href="#contact"
+                                class="btn btn-white-outline">Konsultasi Gratis</a></p>
+                    </div>
+                </div>
+                <div class="col-lg-7">
+                    <div class="hero-img-wrap">
+                        <img src="{{ asset('untree/images/couch.png') }}" class="img-fluid">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <footer class="footer-section">
+        <div class="container relative">
+            <div class="sofa-img">
+                <img src="{{ asset('untree/images/sofa.png') }}" alt="Image" class="img-fluid">
+            </div>
+
+            <div class="row g-5 mb-5">
+                <div class="col-lg-4">
+                    <div class="mb-4 footer-logo-wrap"><a href="#" class="footer-logo">Lutfi Grand
+                            Interior<span>.</span></a></div>
+                    <p class="mb-4">Menciptakan ruang yang tidak hanya indah dipandang, tetapi juga nyaman
+                        ditinggali. Solusi interior terpercaya Anda.</p>
+
+                    <ul class="list-unstyled custom-social">
+                        <li><a href="#"><span class="fa fa-brands fa-facebook-f"></span></a></li>
+                        <li><a href="#"><span class="fa fa-brands fa-instagram"></span></a></li>
+                        <li><a href="#"><span class="fa fa-brands fa-linkedin"></span></a></li>
+                    </ul>
+                </div>
+
+                <div class="col-lg-8">
+                    <div class="row links-wrap">
+                        <div class="col-6 col-sm-6 col-md-3">
+                            <ul class="list-unstyled">
+                                <li><a href="#home">Home</a></li>
+                                <li><a href="#services">Layanan</a></li>
+                                <li><a href="#portfolio">Portfolio</a></li>
+                                <li><a href="#contact">Kontak</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="border-top copyright">
+                <div class="row pt-4">
+                    <div class="col-lg-6">
+                        <p class="mb-2 text-center text-lg-start">Copyright &copy;
+                            <script>
+                                document.write(new Date().getFullYear());
+                            </script>. All Rights Reserved. &mdash; Designed with love by <a
+                                href="https://untree.co">Untree.co</a>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <script src="{{ asset('untree/js/bootstrap.bundle.min.js') }}"></script>
+    <script src="{{ asset('untree/js/tiny-slider.js') }}"></script>
+    <script src="{{ asset('untree/js/custom.js') }}"></script>
+    <script>
+        function kirimKeWhatsapp() {
+            // 1. Ambil nilai dari form
+            var nama = document.getElementById('nama').value;
+            var telepon = document.getElementById('telepon').value;
+            var alamat = document.getElementById('alamat').value;
+            var kelurahan = "";
+            var kecamatan = "";
+            var kota = "";
+            var tglMulai = "";
+            var tglSelesai = "";
+            var catatan = "";
 
 
-<script src="{{ asset('mazer/static/js/components/dark.js') }}"></script>
-<script src="{{ asset('mazer/extensions/perfect-scrollbar/perfect-scrollbar.min.js') }}"></script>
+
+            var layanan = document.getElementById('layanan').value;
 
 
-<script src="{{ asset('mazer/compiled/js/app.js') }}"></script>
+            // 2. Validasi Sederhana (Opsional - agar data tidak kosong)
+            if (nama === "" || telepon === "" || layanan === "") {
+                alert("Mohon lengkapi Nama, Nomor Telepon, dan Layanan.");
+                return;
+            }
 
+            // 3. Format Pesan WhatsApp (Gunakan \n untuk baris baru)
+            var pesan = "*Halo Admin, saya ingin melakukan pemesanan baru.*%0A%0A" +
+                "*DATA PELANGGAN* %0A" +
+                "Nama: " + nama + "%0A" +
+                "No. HP: " + telepon + "%0A" +
+                "Alamat: " + alamat + ", " + kelurahan + ", " + kecamatan + ", " + kota + "%0A%0A" +
+                "*DATA PESANAN* %0A" +
+                "Layanan: " + layanan + "%0A" +
+                "Tgl Mulai: " + tglMulai + "%0A" +
+                "Tgl Selesai: " + tglSelesai + "%0A" +
+                "Catatan: " + catatan;
 
+            // 4. Kirim ke API WhatsApp
+            // GANTI NOMOR INI DENGAN NOMOR TUJUAN (Gunakan kode negara 62, tanpa +)
+            var nomorTujuan = "62895422473134";
 
-<!-- Need: Apexcharts -->
-<script src="{{ asset('mazer/extensions/apexcharts/apexcharts.min.js') }}"></script>
-<script src="{{ asset('mazer/static/js/pages/dashboard.js') }}"></script>
+            var url = "https://wa.me/" + nomorTujuan + "?text=" + pesan;
 
+            // 5. Buka tab baru
+            window.open(url, '_blank');
+        }
+    </script>
 </body>
 
 </html>
