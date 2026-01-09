@@ -89,26 +89,24 @@
                         <div
                             style="width: 100%; height: 350px; background-color: #ddd; border-radius: 10px; overflow: hidden; margin-bottom: 20px;">
                             <iframe
-                                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d31685.925464673645!2d109.6465778!3d-6.8898357!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e70242ca0c4b2b1%3A0x4027a76e352ea40!2sPekalongan%2C%20Pekalongan%20City%2C%20Central%20Java!5e0!3m2!1sen!2sid!4v1700000000000!5m2!1sen!2sid"
-                                width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy"
-                                referrerpolicy="no-referrer-when-downgrade">
-                            </iframe>
+                                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3959.9966611721065!2d109.9678876621569!3d-7.009674503189263!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e706abc0c96d323%3A0x4ec5736eac527ae!2sMasjid%20Darussalam%20Sikalong%20Kranggan!5e0!3m2!1sen!2sid!4v1767944274422!5m2!1sen!2sid"
+                                width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy"
+                                referrerpolicy="no-referrer-when-downgrade"></iframe>
                         </div>
 
                         <h5 class="text-black mb-3">Kontak Resmi</h5>
                         <ul class="list-unstyled">
                             <li class="mb-3 d-flex align-items-start">
                                 <span class="fa fa-map-marker mt-1 me-3 text-primary"></span>
-                                <span>Jl. Jend. Sudirman No. 123, Pekalongan Barat, Kota Pekalongan, Jawa Tengah
-                                    51111</span>
+                                <span>Dukuh Sikalong,Desa Kranggan, Kec. Tersono, Kabupaten Batang, Jawa Tengah 51272</span>
                             </li>
                             <li class="mb-3 d-flex align-items-center">
                                 <span class="fa fa-phone me-3 text-primary"></span>
-                                <span>+62 812 3456 7890</span>
+                                <span>+62 831-5710-0105</span>
                             </li>
                             <li class="d-flex align-items-center">
                                 <span class="fa fa-envelope me-3 text-primary"></span>
-                                <span>admin@furniturepekalongan.com</span>
+                                <span>Fuadlutfi63@yahoo.co.id</span>
                             </li>
                         </ul>
                     </div>

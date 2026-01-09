@@ -57,21 +57,31 @@
 
                 @forelse($services as $service)
                     <div class="col-12 col-md-4 col-lg-3 mb-5 mb-md-0">
-                        <a class="product-item" href="{{ url('/order?layanan=' . $service->nama) }}">
+                        <a class="product-item" href="{{ route('services.show', $service->id) }}"
+                            style="text-decoration: none;">
 
-                            @if (!empty($service->gambar))
-                                <img src="{{ asset('storage/' . $service->gambar) }}" class="img-fluid product-thumbnail">
-                            @else
-                                <img src="{{ asset('images/product-1.png') }}" class="img-fluid product-thumbnail">
-                            @endif
+                            <div style="height: 200px; overflow: hidden; border-radius: 10px; margin-bottom: 15px;">
+                                @if (!empty($service->gambar))
+                                    <img src="{{ asset('storage/' . $service->gambar) }}"
+                                        class="img-fluid product-thumbnail"
+                                        style="object-fit: cover; width: 100%; height: 100%;">
+                                @else
+                                    <img src="{{ asset('images/product-1.png') }}" class="img-fluid product-thumbnail"
+                                        style="object-fit: cover; width: 100%; height: 100%;">
+                                @endif
+                            </div>
 
-                            <br>
+                            <h3 class="product-title" style="font-size: 1.2rem; font-weight: bold; margin-bottom: 5px;">
+                                {{ $service->nama }}
+                            </h3>
 
-                            <strong class="product-price">{{ $service->nama }}</strong>
-                            <h3 class="product-title">{{ $service->deskripsi }}</h3>
+                            <p class="text-muted" style="font-size: 0.9rem; line-height: 1.4;">
+                                {{ Str::limit($service->deskripsi, 60) }}
+                            </p>
 
-                            <span class="icon-cross">
-                                <img src="{{ asset('images/cross.svg') }}" class="img-fluid">
+                            <span class="icon-arrow"
+                                style="display: block; margin-top: 10px; font-size: 12px; color: #3b5d50; font-weight: bold;">
+                                Lihat Selengkapnya <i class="fa-solid fa-arrow-right ms-1"></i>
                             </span>
                         </a>
                     </div>
@@ -83,7 +93,7 @@
             </div>
         </div>
     </div>
-     <div class="testimonial-section">
+    <div class="testimonial-section">
         <div class="container">
             <div class="row">
                 <div class="col-lg-7 mx-auto text-center">

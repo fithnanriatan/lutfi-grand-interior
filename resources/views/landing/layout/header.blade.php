@@ -92,6 +92,9 @@
                     <li class="nav-item {{ request()->routeIs('kontak') ? 'active' : '' }}">
                         <a class="nav-link" href="{{ route('kontak') }}">Kontak</a>
                     </li>
+                    <li ></li>
+                        <a href="{{ route('login') }}" class="btn btn-secondary me-2">Login Admin</a>
+                    </li>
 
                 </ul>
             </div>

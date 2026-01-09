@@ -23,4 +23,13 @@ class ServiceController extends Controller
         // Return view dengan data
         return view('landing.layanan', compact('services', 'reviews'));
     }
+
+    public function show($id)
+    {
+        // Cari service berdasarkan ID, jika tidak ada tampilkan 404
+        $service = Layanan::findOrFail($id);
+        $service = Layanan::findOrFail($id);
+
+        return view('landing.layanan_detail', compact('service'));
+    }
 }

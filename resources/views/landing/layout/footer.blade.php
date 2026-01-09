@@ -12,9 +12,7 @@
                        ditinggali. Solusi interior terpercaya Anda.</p>
 
                    <ul class="list-unstyled custom-social">
-                       <li><a href="#"><span class="fa fa-brands fa-facebook-f"></span></a></li>
-                       <li><a href="#"><span class="fa fa-brands fa-instagram"></span></a></li>
-                       <li><a href="#"><span class="fa fa-brands fa-linkedin"></span></a></li>
+                       <li><a href="https://www.facebook.com/lutfi.oi"><span class="fa fa-brands fa-facebook-f"></span></a> - Lutfi Oi</li>
                    </ul>
                </div>
 
@@ -26,6 +24,7 @@
                                <li><a href="#services">Layanan</a></li>
                                <li><a href="#portfolio">Portfolio</a></li>
                                <li><a href="#contact">Kontak</a></li>
+                               <li><a href="{{ route('login') }}">Login Admin</a></li>
                            </ul>
                        </div>
                    </div>
@@ -38,8 +37,8 @@
                        <p class="mb-2 text-center text-lg-start">Copyright &copy;
                            <script>
                                document.write(new Date().getFullYear());
-                           </script>. All Rights Reserved. &mdash; Designed with love by <a
-                               href="https://untree.co">Untree.co</a>
+                           </script>. All Rights Reserved to Lutfi Grand Interior. &mdash; Designed with love by <a
+                               href="https://untree.co">Putri Team</a>
                        </p>
                    </div>
                </div>

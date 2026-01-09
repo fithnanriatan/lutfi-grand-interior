@@ -35,7 +35,8 @@
                 <div class="col-lg-5 ps-lg-5">
 
                     <span class="d-block text-primary text-uppercase mb-2 fw-bold">
-                        {{ $portfolio->pemesanan->layanan ?? 'Custom Furniture' }}
+                        {{-- Kita ambil properti 'nama' dari objek layanan --}}
+                        {{ $portfolio->pemesanan->layanan->nama ?? ($portfolio->pemesanan->layanan['NAMA'] ?? 'Custom Furniture') }}
                     </span>
 
                     <h2 class="section-title mb-4">{{ $portfolio->judul }}</h2>

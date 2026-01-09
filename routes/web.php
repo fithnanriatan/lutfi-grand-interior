@@ -14,7 +14,8 @@ use App\Http\Controllers\Landing\KontakController;
 
 // Landing page (public)
 Route::get('/', [LandingController::class, 'index'])->name('landing');
-Route::get('/services', [ServiceController::class, 'index'])->name('services');
+Route::get('/services', [ServiceController::class, 'index'])->name('services'); // Halaman List
+Route::get('/services/{id}', [ServiceController::class, 'show'])->name('services.show'); // Halaman Detail
 Route::get('/kontak', [KontakController::class, 'index'])->name('kontak');
 
 // Rute Halaman Daftar Portfolio
@@ -34,19 +35,19 @@ Route::middleware('guest')->group(function () {
 // Admin routes (sudah login)
 Route::middleware('auth')->prefix('admin')->name('admin.')->group(function () {
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
-    
+
     Route::resource('layanan', LayananController::class);
     Route::resource('pemesanan', PemesananController::class);
     Route::resource('portfolio', PortfolioController::class);
-    
+
     // Review routes
     Route::get('review', [ReviewController::class, 'index'])->name('review.index');
     Route::post('review/{review}/toggle', [ReviewController::class, 'toggleTampilkan'])->name('review.toggle');
     Route::delete('review/{review}', [ReviewController::class, 'destroy'])->name('review.destroy');
-    
+
     // Portfolio extra routes
     Route::post('portfolio/{portfolio}/toggle', [PortfolioController::class, 'toggleTampilkan'])->name('portfolio.toggle');
     Route::delete('portfolio/{portfolio}/gallery/{index}', [PortfolioController::class, 'deleteGalleryImage'])->name('portfolio.deleteGalleryImage');
-    
+
     Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 });
