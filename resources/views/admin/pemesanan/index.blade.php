@@ -75,8 +75,8 @@
                             <td>{{ $pemesanan->tanggal_mulai->format('d/m/Y') }}</td>
                             <td>Rp {{ number_format($pemesanan->harga_final, 0, ',', '.') }}</td>
                             <td>
-                                <span class="badge {{ $pemesanan->status_badge }}">
-                                    {{ $pemesanan->status_label }}
+                                <span class="badge bg-{{ $pemesanan->status == 'pending' ? 'warning' : ($pemesanan->status == 'proses' ? 'info' : ($pemesanan->status == 'selesai' ? 'success' : 'danger')) }}">
+                                    {{ ucfirst($pemesanan->status) }}
                                 </span>
                             </td>
                             <td>
@@ -89,7 +89,7 @@
                                        class="btn btn-sm btn-warning" title="Edit">
                                         <i class="bi bi-pencil"></i>
                                     </a>
-                                    <form action="{{ route('admin.pemesanan.destroy', $pemesanan->id) }}" 
+                                    {{-- <form action="{{ route('admin.pemesanan.destroy', $pemesanan->id) }}" 
                                           method="POST" 
                                           onsubmit="return confirm('Yakin ingin menghapus pemesanan ini?')"
                                           class="d-inline">
@@ -98,7 +98,7 @@
                                         <button type="submit" class="btn btn-sm btn-danger" title="Hapus">
                                             <i class="bi bi-trash"></i>
                                         </button>
-                                    </form>
+                                    </form> --}}
                                 </div>
                             </td>
                         </tr>

@@ -6,8 +6,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@yield('title', 'Dashboard') - Admin Panel</title>
 
-    <link rel="shortcut icon" href="{{ asset('mazer/static/images/logo/favicon.svg') }}" type="image/x-icon">
-    <link rel="shortcut icon" href="{{ asset('mazer/static/images/logo/favicon.png') }}" type="image/png">
+    <link rel="shortcut icon" href="{{ asset('logo/favicon-lutfi.svg') }}" type="image/x-icon">
+    <link rel="shortcut icon" href="{{ asset('logo/favicon-lutfi.png') }}" type="image/png">
 
     <link rel="stylesheet" crossorigin href="{{ asset('mazer/compiled/css/app.css') }}">
     <link rel="stylesheet" crossorigin href="{{ asset('mazer/compiled/css/app-dark.css') }}">
@@ -24,8 +24,9 @@
                 <div class="sidebar-header position-relative">
                     <div class="d-flex justify-content-between align-items-center">
                         <div class="logo">
-                            <a href="#"><img src="{{ asset('mazer/static/images/logo/logo.svg') }}" alt="Logo"
-                                    srcset=""></a>
+                            <a href="#"><img src="{{ asset('logo/icon-lutfi.svg') }}" alt="Logo"
+                                    style="width: 124px; height: auto;">
+                            </a>
                         </div>
                         <div class="theme-toggle d-flex gap-2 align-items-center mt-2">
                             <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
@@ -74,17 +75,19 @@
                             </a>
                         </li>
 
-                        <li class="sidebar-item {{ request()->routeIs('admin.layanan.*') ? 'active' : '' }}">
-                            <a href="{{ route('admin.layanan.index') }}" class='sidebar-link'>
-                                <i class="bi bi-briefcase-fill"></i>
-                                <span>Layanan</span>
-                            </a>
-                        </li>
-
                         <li class="sidebar-item {{ request()->routeIs('admin.pemesanan.*') ? 'active' : '' }}">
                             <a href="{{ route('admin.pemesanan.index') }}" class='sidebar-link'>
                                 <i class="bi bi-cart-fill"></i>
                                 <span>Pemesanan</span>
+                            </a>
+                        </li>
+
+                        <hr>
+
+                        <li class="sidebar-item {{ request()->routeIs('admin.layanan.*') ? 'active' : '' }}">
+                            <a href="{{ route('admin.layanan.index') }}" class='sidebar-link'>
+                                <i class="bi bi-briefcase-fill"></i>
+                                <span>Layanan</span>
                             </a>
                         </li>
 
@@ -102,6 +105,9 @@
                             </a>
                         </li>
 
+                        <hr>
+                        <li class="sidebar-title">Aksi</li>
+
                         <li class="sidebar-item">
                             <a href="{{ route('admin.logout') }}" class='sidebar-link'
                                 onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
@@ -111,6 +117,13 @@
                             <form id="logout-form" action="{{ route('admin.logout') }}" method="POST" class="d-none">
                                 @csrf
                             </form>
+                        </li>
+
+                        <li class="sidebar-item">
+                            <a href="/" class='sidebar-link'>
+                                <i class="bi bi-eye"></i>
+                                <span>Lihat Website</span>
+                            </a>
                         </li>
                     </ul>
                 </div>
