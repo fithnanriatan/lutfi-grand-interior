@@ -55,8 +55,6 @@
            var telepon = document.getElementById('telepon').value;
            var alamat = document.getElementById('alamat').value;
            var layanan = document.getElementById('layanan').value;
-           var tglMulai = document.getElementById('tgl_mulai').value;
-           var tglSelesai = document.getElementById('tgl_selesai').value;
            var catatan = document.getElementById('catatan').value;
            var kelurahan = "";
            var kecamatan = "";
@@ -74,16 +72,14 @@
                "*DATA PELANGGAN* %0A" +
                "Nama: " + nama + "%0A" +
                "No. HP: " + telepon + "%0A" +
-               "Alamat: " + alamat + ", " + kelurahan + ", " + kecamatan + ", " + kota + "%0A%0A" +
+               "Alamat: " + alamat + "%0A%0A" +
                "*DATA PESANAN* %0A" +
                "Layanan: " + layanan + "%0A" +
-               "Tgl Mulai: " + tglMulai + "%0A" +
-               "Tgl Selesai: " + tglSelesai + "%0A" +
                "Catatan: " + catatan;
 
            // 4. Kirim ke API WhatsApp
            // GANTI NOMOR INI DENGAN NOMOR TUJUAN (Gunakan kode negara 62, tanpa +)
-           var nomorTujuan = "62895422473134";
+           var nomorTujuan = "6283157100105";
 
            var url = "https://wa.me/" + nomorTujuan + "?text=" + pesan;
 

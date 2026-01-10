@@ -54,21 +54,6 @@
                             </select>
                         </div>
 
-                        <div class="row">
-                            <div class="col-6">
-                                <div class="form-group mb-3">
-                                    <label class="text-black" for="tgl_mulai">Rencana Mulai</label>
-                                    <input type="date" class="form-control" id="tgl_mulai">
-                                </div>
-                            </div>
-                            <div class="col-6">
-                                <div class="form-group mb-3">
-                                    <label class="text-black" for="tgl_selesai">Target Selesai</label>
-                                    <input type="date" class="form-control" id="tgl_selesai">
-                                </div>
-                            </div>
-                        </div>
-
                         <div class="form-group mb-4">
                             <label class="text-black" for="catatan">Catatan Tambahan</label>
                             <textarea class="form-control" id="catatan" rows="3" placeholder="Contoh: Saya ingin warna kayu yang gelap..."></textarea>

@@ -66,7 +66,7 @@
 
                     <div class="cta-section border-top pt-4">
                         <p class="mb-3">Tertarik membuat proyek serupa?</p>
-                        <a href="https://wa.me/628111111111?text=Halo%20Admin,%20saya%20melihat%20portfolio%20'{{ urlencode($portfolio->judul) }}'%20dan%20tertarik%20membuat%20yang%20seperti%20itu."
+                        <a href="https://wa.me/6283157100105?text=Halo%20Admin,%20saya%20melihat%20portfolio%20'{{ urlencode($portfolio->judul) }}'%20dan%20tertarik%20membuat%20yang%20seperti%20itu."
                             target="_blank" class="btn btn-primary btn-block rounded-pill py-3 px-5">
                             <i class="fa-brands fa-whatsapp me-2"></i> Tanya Harga Desain Ini
                         </a>
