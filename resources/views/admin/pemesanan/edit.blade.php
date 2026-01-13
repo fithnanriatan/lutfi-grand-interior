@@ -170,7 +170,7 @@
                                     id="status" 
                                     name="status"
                                     required>
-                                <option value="pending" {{ old('status', $pemesanan->status) == 'pending' ? 'selected' : '' }}>Pending</option>
+                                <option value="menunggu" {{ old('status', $pemesanan->status) == 'menunggu' ? 'selected' : '' }}>Menunggu</option>
                                 <option value="proses" {{ old('status', $pemesanan->status) == 'proses' ? 'selected' : '' }}>Dalam Proses</option>
                                 <option value="selesai" {{ old('status', $pemesanan->status) == 'selesai' ? 'selected' : '' }}>Selesai</option>
                                 <option value="dibatalkan" {{ old('status', $pemesanan->status) == 'dibatalkan' ? 'selected' : '' }}>Dibatalkan</option>

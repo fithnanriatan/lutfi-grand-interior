@@ -11,6 +11,7 @@ use App\Http\Controllers\LandingController;
 use App\Http\Controllers\Landing\ServiceController;
 use App\Http\Controllers\Landing\PorfoliosController;
 use App\Http\Controllers\Landing\KontakController;
+use App\Http\Controllers\UserController;
 
 // Landing page (public)
 Route::get('/', [LandingController::class, 'index'])->name('landing');
@@ -39,6 +40,7 @@ Route::middleware('auth')->prefix('admin')->name('admin.')->group(function () {
     Route::resource('layanan', LayananController::class);
     Route::resource('pemesanan', PemesananController::class);
     Route::resource('portfolio', PortfolioController::class);
+    Route::resource('user', UserController::class)->except(['show']);
 
     // Review routes
     Route::get('review', [ReviewController::class, 'index'])->name('review.index');

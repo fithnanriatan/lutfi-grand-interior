@@ -104,7 +104,14 @@
                                 <span>Review</span>
                             </a>
                         </li>
-
+                        
+                        <li class="sidebar-item {{ request()->routeIs('admin.user.*') ? 'active' : '' }}">
+                            <a href="{{ route('admin.user.index') }}" class='sidebar-link'>
+                                <i class="bi bi-people-fill"></i>
+                                <span>Kelola User</span>
+                            </a>
+                        </li>
+                        
                         <hr>
                         <li class="sidebar-title">Aksi</li>
 
@@ -114,7 +121,8 @@
                                 <i class="bi bi-box-arrow-right"></i>
                                 <span>Logout</span>
                             </a>
-                            <form id="logout-form" action="{{ route('admin.logout') }}" method="POST" class="d-none">
+                            <form id="logout-form" action="{{ route('admin.logout') }}" method="POST"
+                                class="d-none">
                                 @csrf
                             </form>
                         </li>

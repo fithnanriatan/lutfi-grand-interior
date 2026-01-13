@@ -16,8 +16,8 @@ class DashboardController extends Controller
     {
         // 1. Statistik Utama
         $totalPemesanan = Pemesanan::count();
-        $pemesananBulanIni = Pemesanan::whereMonth('created_at', Carbon::now()->month)
-                                      ->whereYear('created_at', Carbon::now()->year)
+        $pemesananBulanIni = Pemesanan::whereMonth('tanggal_mulai', Carbon::now()->month)
+                                      ->whereYear('tanggal_mulai', Carbon::now()->year)
                                       ->count();
         
         // Pemasukan bulan ini (hanya yang selesai)
@@ -31,8 +31,10 @@ class DashboardController extends Controller
                                        ->whereYear('tanggal_selesai', Carbon::now()->year)
                                        ->sum('harga_final');
         
-        $pemesananPending = Pemesanan::where('status', 'pending')->count();
+        $pemesananMenunggu = Pemesanan::where('status', 'menunggu')->count();
         $pemesananProses = Pemesanan::where('status', 'proses')->count();
+        $pemesananSelesai = Pemesanan::where('status', 'selesai')->count();
+        $pemesananDibatalkan = Pemesanan::where('status', 'dibatalkan')->count();
 
         // 2. Grafik Pemasukan 6 Bulan Terakhir
         $pemasukanPerBulan = [];
@@ -66,7 +68,7 @@ class DashboardController extends Controller
 
         // 5. Status Pemesanan (untuk pie chart)
         $statusPemesanan = [
-            'pending' => Pemesanan::where('status', 'pending')->count(),
+            'menunggu' => Pemesanan::where('status', 'menunggu')->count(),
             'proses' => Pemesanan::where('status', 'proses')->count(),
             'selesai' => Pemesanan::where('status', 'selesai')->count(),
             'dibatalkan' => Pemesanan::where('status', 'dibatalkan')->count(),
@@ -81,8 +83,10 @@ class DashboardController extends Controller
             'pemesananBulanIni',
             'pemasukanBulanIni',
             'pemasukanTahunIni',
-            'pemesananPending',
+            'pemesananMenunggu',
             'pemesananProses',
+            'pemesananSelesai',
+            'pemesananDibatalkan',
             'pemasukanPerBulan',
             'bulanLabels',
             'topLayanan',
