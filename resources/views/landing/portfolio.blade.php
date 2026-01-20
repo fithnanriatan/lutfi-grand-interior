@@ -15,39 +15,25 @@
 
             <div class="row">
                 @forelse($portfolios as $portfolio)
-                    <div class="col-12 col-md-4 col-lg-3 mb-5">
+                    <div class="col-12 col-md-6 col-lg-3 mb-5">
 
                         <a class="product-item" href="{{ route('portfolios.show', $portfolio->id) }}"
                             style="text-decoration: none;">
 
-                            <div style="height: 250px; overflow: hidden; border-radius: 10px; margin-bottom: 20px;">
+                            <div class="img-wrapper mb-3 position-relative overflow-hidden rounded">
                                 @if (!empty($portfolio->gambar_cover))
-                                    <img src="{{ asset('storage/' . $portfolio->gambar_cover) }}"
-                                        class="img-fluid product-thumbnail"
-                                        style="object-fit: cover; width: 100%; height: 100%;">
+                                    <img src="{{ asset('storage/' . $portfolio->gambar_cover) }}" class="img-fluid w-100"
+                                        style="object-fit: cover; height: 250px;">
                                 @else
-                                    <img src="{{ asset('images/product-1.png') }}" class="img-fluid product-thumbnail"
-                                        style="object-fit: cover; width: 100%; height: 100%;">
+                                    <img src="{{ asset('images/product-1.png') }}" class="img-fluid w-100"
+                                        style="object-fit: cover; height: 250px;">
                                 @endif
                             </div>
 
-                            <h3 class="product-title" style="font-size: 1.2rem; margin-bottom: 5px;">{{ $portfolio->judul }}
-                            </h3>
-
-                            <p class="text-muted" style="font-size: 0.9rem; line-height: 1.4;">
-                                {{ Str::limit($portfolio->deskripsi, 50) }}
-                            </p>
-
-                            <span class="icon-arrow"
-                                style="display: block; margin-top: 10px; font-size: 12px; color: #3b5d50; font-weight: bold;">
-                                Lihat Detail <i class="fa-solid fa-arrow-right ms-1"></i>
-                            </span>
+                            <h3 class="product-title mt-2">{{ $portfolio->judul }}</h3>
                         </a>
                     </div>
                 @empty
-                    <div class="col-12 text-center">
-                        <div class="alert alert-info">Belum ada portofolio yang ditampilkan.</div>
-                    </div>
                 @endforelse
             </div>
 
@@ -59,4 +45,4 @@
 
         </div>
     </div>
-    @endsection
+@endsection

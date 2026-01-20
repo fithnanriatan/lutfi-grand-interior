@@ -17,7 +17,8 @@
                 <div class="col-lg-6 mb-5 mb-lg-0">
                     <form action="#" class="contact-form p-4 bg-white shadow-sm rounded">
 
-                        <div class="row">
+
+                    <div class="row">
                             <div class="col-6">
                                 <div class="form-group mb-3">
                                     <label class="text-black" for="nama">Nama Lengkap <span
