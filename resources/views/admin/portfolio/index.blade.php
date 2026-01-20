@@ -62,7 +62,7 @@
                                 <div class="btn-group" role="group">
                                     <a href="{{ route('admin.portfolio.show', $portfolio->id) }}" 
                                        class="btn btn-sm btn-info" title="Detail">
-                                        <i class="bi bi-eye"></i>
+                                        <i class="bi bi-info-circle"></i>
                                     </a>
                                     <a href="{{ route('admin.portfolio.edit', $portfolio->id) }}" 
                                        class="btn btn-sm btn-warning" title="Edit">

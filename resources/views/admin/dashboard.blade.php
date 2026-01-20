@@ -101,8 +101,8 @@
             </div>
         </div>
 
-        <div class="row">
-            <!-- Pemesanan Pending -->
+        {{-- <div class="row">
+            <!-- Pemesanan Menunggu -->
             <div class="col-6 col-lg-3 col-md-6">
                 <div class="card stats-card" style="border-left-color: #ff7976;">
                     <div class="card-body px-4 py-4-5">
@@ -113,8 +113,8 @@
                                 </div>
                             </div>
                             <div class="col-md-8 col-lg-12 col-xl-12 col-xxl-7">
-                                <h6 class="text-muted font-semibold">Pending</h6>
-                                <h6 class="font-extrabold mb-0">{{ $pemesananPending }}</h6>
+                                <h6 class="text-muted font-semibold">Menunggu</h6>
+                                <h6 class="font-extrabold mb-0">{{ $pemesananMenunggu }}</h6>
                             </div>
                         </div>
                     </div>
@@ -140,6 +140,46 @@
                 </div>
             </div>
 
+            <!-- Pemesanan Selesai -->
+            <div class="col-6 col-lg-3 col-md-6">
+                <div class="card stats-card" style="border-left-color: #5ddab4;">
+                    <div class="card-body px-4 py-4-5">
+                        <div class="row">
+                            <div class="col-md-4 col-lg-12 col-xl-12 col-xxl-5 d-flex justify-content-start">
+                                <div class="stats-icon green mb-2">
+                                    <i class="iconly-boldTickSquare"></i>
+                                </div>
+                            </div>
+                            <div class="col-md-8 col-lg-12 col-xl-12 col-xxl-7">
+                                <h6 class="text-muted font-semibold">Selesai</h6>
+                                <h6 class="font-extrabold mb-0">{{ $pemesananSelesai }}</h6>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Pemesanan Dibatalkan -->
+            <div class="col-6 col-lg-3 col-md-6">
+                <div class="card stats-card" style="border-left-color: #9ca3af;">
+                    <div class="card-body px-4 py-4-5">
+                        <div class="row">
+                            <div class="col-md-4 col-lg-12 col-xl-12 col-xxl-5 d-flex justify-content-start">
+                                <div class="stats-icon" style="background-color: #f3f4f6;">
+                                    <i class="iconly-boldCloseSquare" style="color: #9ca3af;"></i>
+                                </div>
+                            </div>
+                            <div class="col-md-8 col-lg-12 col-xl-12 col-xxl-7">
+                                <h6 class="text-muted font-semibold">Dibatalkan</h6>
+                                <h6 class="font-extrabold mb-0">{{ $pemesananDibatalkan }}</h6>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
             <!-- Rating -->
             <div class="col-6 col-lg-3 col-md-6">
                 <div class="card stats-card" style="border-left-color: #ffce31;">
@@ -177,7 +217,7 @@
                     </div>
                 </div>
             </div>
-        </div>
+        </div> --}}
     </div>
 </section>
 
@@ -344,10 +384,10 @@
         const statusChart = new Chart(statusCtx, {
             type: 'doughnut',
             data: {
-                labels: ['Pending', 'Proses', 'Selesai', 'Dibatalkan'],
+                labels: ['Menunggu', 'Proses', 'Selesai', 'Dibatalkan'],
                 datasets: [{
                     data: [
-                        {{ $statusPemesanan['pending'] }},
+                        {{ $statusPemesanan['menunggu'] }},
                         {{ $statusPemesanan['proses'] }},
                         {{ $statusPemesanan['selesai'] }},
                         {{ $statusPemesanan['dibatalkan'] }}

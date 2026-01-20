@@ -1,331 +1,281 @@
 @extends('admin.layouts.app')
 
-@section('title', 'Daftar Review')
-@section('page-title', 'Daftar Review')
+@section('title', 'Manajemen Review')
+@section('page-title', 'Manajemen Review')
 
 @section('content')
     <section class="section">
-        <div class="card">
-            <div class="card-header">
-                <h5 class="card-title mb-0">Semua Review</h5>
-            </div>
-            <div class="card-body">
-                {{-- Pesan Flash --}}
-                {{-- @if (session('success'))
-                    <div class="alert alert-success alert-dismissible fade show" role="alert">
-                        <i class="bi bi-check-circle me-2"></i>{{ session('success') }}
-                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                    </div>
-                @endif
-
-                @if (session('error'))
-                    <div class="alert alert-danger alert-dismissible fade show" role="alert">
-                        <i class="bi bi-exclamation-triangle me-2"></i>{{ session('error') }}
-                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                    </div>
-                @endif --}}
-
-                {{-- Filter --}}
-                <form method="GET" action="{{ route('admin.review.index') }}" class="mb-4">
-                    <div class="row g-3 align-items-end">
-                        <div class="col-md-4">
-                            <label for="filter-tampilkan" class="form-label">Status Tampilan</label>
-                            <select name="tampilkan" id="filter-tampilkan" class="form-select">
-                                <option value="">Semua Status Tampilan</option>
-                                <option value="1" {{ request('tampilkan') === '1' ? 'selected' : '' }}>Ditampilkan
-                                </option>
-                                <option value="0" {{ request('tampilkan') === '0' ? 'selected' : '' }}>Disembunyikan
-                                </option>
-                            </select>
-                        </div>
-                        <div class="col-md-4">
-                            <label for="filter-rating" class="form-label">Rating</label>
-                            <select name="rating" id="filter-rating" class="form-select">
-                                <option value="">Semua Rating</option>
-                                <option value="5" {{ request('rating') === '5' ? 'selected' : '' }}>⭐⭐⭐⭐⭐ (5 Bintang)
-                                </option>
-                                <option value="4" {{ request('rating') === '4' ? 'selected' : '' }}>⭐⭐⭐⭐ (4 Bintang)
-                                </option>
-                                <option value="3" {{ request('rating') === '3' ? 'selected' : '' }}>⭐⭐⭐ (3 Bintang)
-                                </option>
-                                <option value="2" {{ request('rating') === '2' ? 'selected' : '' }}>⭐⭐ (2 Bintang)
-                                </option>
-                                <option value="1" {{ request('rating') === '1' ? 'selected' : '' }}>⭐ (1 Bintang)
-                                </option>
-                            </select>
-                        </div>
-                        <div class="col-md-4">
-                            <div class="d-flex gap-2">
-                                <button type="submit" class="btn btn-primary flex-fill">
-                                    <i class="bi bi-search"></i> Filter
-                                </button>
-                                @if (request('tampilkan') || request('rating'))
-                                    <a href="{{ route('admin.review.index') }}" class="btn btn-secondary"
-                                        title="Reset Filter">
-                                        <i class="bi bi-arrow-clockwise"></i>
-                                    </a>
-                                @endif
+        {{-- Header Section dengan Statistik --}}
+        <div class="row mb-4">
+            <div class="col-md-3">
+                <div class="card" style="border-left: 4px solid #435ebe;">
+                    <div class="card-body">
+                        <div class="d-flex justify-content-between align-items-center">
+                            <div>
+                                <h6 class="text-muted mb-1">Total Review</h6>
+                                <h3 class="mb-0">{{ $reviews->total() }}</h3>
                             </div>
+                            <div class="fs-1 opacity-50">
+                                <i class="bi bi-chat-square-text"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="card" style="border-left: 4px solid #5ddab4;">
+                    <div class="card-body">
+                        <div class="d-flex justify-content-between align-items-center">
+                            <div>
+                                <h6 class="text-muted mb-1">Ditampilkan</h6>
+                                <h3 class="mb-0">{{ $reviews->where('tampilkan', 1)->count() }}</h3>
+                            </div>
+                            <div class="fs-1 opacity-50">
+                                <i class="bi bi-eye-fill"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="card" style="border-left: 4px solid #ffce31;">
+                    <div class="card-body">
+                        <div class="d-flex justify-content-between align-items-center">
+                            <div>
+                                <h6 class="text-muted mb-1">Rating Rata-rata</h6>
+                                <h3 class="mb-0">{{ number_format($reviews->avg('rating'), 1) }}</h3>
+                            </div>
+                            <div class="fs-1 opacity-50">
+                                <i class="bi bi-star-fill"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="card" style="border-left: 4px solid #9ca3af;">
+                    <div class="card-body">
+                        <div class="d-flex justify-content-between align-items-center">
+                            <div>
+                                <h6 class="text-muted mb-1">Disembunyikan</h6>
+                                <h3 class="mb-0">{{ $reviews->where('tampilkan', 0)->count() }}</h3>
+                            </div>
+                            <div class="fs-1 opacity-50">
+                                <i class="bi bi-eye-slash-fill"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        {{-- Filter Section --}}
+        <div class="card mb-4">
+            <div class="card-body">
+                <form method="GET" action="{{ route('admin.review.index') }}" id="filterForm">
+                    <div class="row g-3">
+                        <div class="col-md-6">
+                            <label class="form-label">
+                                <i class="bi bi-funnel me-1"></i>Filter Rating
+                            </label>
+                            <div class="btn-group w-100" role="group">
+                                <input type="radio" class="btn-check" name="rating" id="rating-all" value="" 
+                                    {{ request('rating') === null ? 'checked' : '' }}>
+                                <label class="btn btn-outline-primary" for="rating-all">Semua</label>
+                                
+                                @for($i = 5; $i >= 1; $i--)
+                                    <input type="radio" class="btn-check" name="rating" id="rating-{{ $i }}" 
+                                        value="{{ $i }}" {{ request('rating') == $i ? 'checked' : '' }}>
+                                    <label class="btn btn-outline-warning" for="rating-{{ $i }}">
+                                        {{ str_repeat('⭐', $i) }}
+                                    </label>
+                                @endfor
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <label class="form-label">
+                                <i class="bi bi-eye me-1"></i>Status Tampilan
+                            </label>
+                            <div class="btn-group w-100" role="group">
+                                <input type="radio" class="btn-check" name="tampilkan" id="tampil-all" value="" 
+                                    {{ request('tampilkan') === null ? 'checked' : '' }}>
+                                <label class="btn btn-outline-primary" for="tampil-all">Semua</label>
+                                
+                                <input type="radio" class="btn-check" name="tampilkan" id="tampil-yes" value="1" 
+                                    {{ request('tampilkan') === '1' ? 'checked' : '' }}>
+                                <label class="btn btn-outline-success" for="tampil-yes">
+                                    <i class="bi bi-eye"></i> Tampil
+                                </label>
+                                
+                                <input type="radio" class="btn-check" name="tampilkan" id="tampil-no" value="0" 
+                                    {{ request('tampilkan') === '0' ? 'checked' : '' }}>
+                                <label class="btn btn-outline-secondary" for="tampil-no">
+                                    <i class="bi bi-eye-slash"></i> Sembunyi
+                                </label>
+                            </div>
+                        </div>
+                        <div class="col-md-2 d-flex align-items-end">
+                            @if (request('tampilkan') || request('rating'))
+                                <a href="{{ route('admin.review.index') }}" class="btn btn-light w-100">
+                                    <i class="bi bi-arrow-clockwise"></i> Reset
+                                </a>
+                            @endif
                         </div>
                     </div>
                 </form>
-
-                {{-- Informasi Total --}}
-                @if ($reviews->total() > 0)
-                    <div class="mb-3">
-                        <small class="text-muted">
-                            Menampilkan {{ $reviews->firstItem() }} - {{ $reviews->lastItem() }} dari
-                            {{ $reviews->total() }} review
-                        </small>
-                    </div>
-                @endif
-
-                <div class="table-responsive">
-                    <table class="table table-striped table-hover">
-                        <thead class="table-light">
-                            <tr>
-                                <th style="width: 5%">No</th>
-                                <th style="width: 15%">Nama Pengguna</th>
-                                <th style="width: 15%">Layanan</th>
-                                <th style="width: 12%">Rating</th>
-                                <th style="width: 25%">Komentar</th>
-                                <th style="width: 10%">Tanggal</th>
-                                <th style="width: 10%">Status</th>
-                                <th style="width: 8%">Aksi</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            @forelse($reviews as $index => $review)
-                                <tr>
-                                    <td>{{ $reviews->firstItem() + $index }}</td>
-                                    <td>
-                                        <strong>{{ $review->nama_pengguna }}</strong><br>
-                                        <small class="text-muted">
-                                            <i class="bi bi-telephone"></i> {{ $review->pemesanan->telepon_pelanggan }}
-                                        </small>
-                                    </td>
-                                    <td>
-                                        <span class="badge bg-info text-dark">
-                                            {{ $review->pemesanan->layanan->nama }}
-                                        </span>
-                                    </td>
-                                    <td>
-                                        <div class="d-flex align-items-center gap-2">
-                                            <span>{{ str_repeat('⭐', $review->rating) }}</span>
-                                            <span class="badge bg-warning text-dark">{{ $review->rating }}/5</span>
-                                        </div>
-                                    </td>
-                                    <td>
-                                        <small>{{ Str::limit($review->komentar, 60) }}</small>
-                                    </td>
-                                    <td>
-                                        <small>{{ $review->tanggal_review->format('d/m/Y') }}</small>
-                                    </td>
-                                    <td>
-                                        @if ($review->tampilkan)
-                                            <span class="badge bg-success">
-                                                <i class="bi bi-eye"></i> Ditampilkan
-                                            </span>
-                                        @else
-                                            <span class="badge bg-secondary">
-                                                <i class="bi bi-eye-slash"></i> Disembunyikan
-                                            </span>
-                                        @endif
-                                    </td>
-                                    <td>
-                                        <div class="btn-group" role="group" aria-label="Aksi Review">
-                                            {{-- Tombol View Detail --}}
-                                            <button type="button" class="btn btn-sm btn-info" data-bs-toggle="modal"
-                                                data-bs-target="#detailModal-{{ $review->id }}" title="Lihat Detail"
-                                                aria-label="Lihat Detail Review">
-                                                <i class="bi bi-info-circle"></i>
-                                            </button>
-
-                                            {{-- Tombol Toggle Tampilan --}}
-                                            <form action="{{ route('admin.review.toggle', $review->id) }}" method="POST"
-                                                class="d-inline form-toggle"
-                                                data-action="{{ $review->tampilkan ? 'sembunyikan' : 'tampilkan' }}">
-                                                @csrf
-                                                <button type="submit"
-                                                    class="btn btn-sm {{ $review->tampilkan ? 'btn-warning' : 'btn-success' }}"
-                                                    title="{{ $review->tampilkan ? 'Sembunyikan Review' : 'Tampilkan Review' }}"
-                                                    aria-label="{{ $review->tampilkan ? 'Sembunyikan' : 'Tampilkan' }}">
-                                                    <i class="bi {{ $review->tampilkan ? 'bi-eye-slash' : 'bi-eye' }}"></i>
-                                                </button>
-                                            </form>
-                                        </div>
-                                    </td>
-                                    {{-- <form action="{{ route('admin.review.destroy', $review->id) }}" 
-                                  method="POST" 
-                                  class="d-inline form-delete">
-                                @csrf
-                                @method('DELETE')
-                                <button type="submit" 
-                                        class="btn btn-sm btn-danger" 
-                                        title="Hapus Review"
-                                        aria-label="Hapus Review">
-                                    <i class="bi bi-trash"></i>
-                                </button>
-                            </form> --}}
-                                </tr>
-                            @empty
-                                <tr>
-                                    <td colspan="8" class="text-center py-4">
-                                        <div class="text-muted">
-                                            <i class="bi bi-inbox fs-1 d-block mb-2"></i>
-                                            <p class="mb-0">Belum ada review yang tersedia</p>
-                                            @if (request('tampilkan') || request('rating'))
-                                                <small>Coba ubah filter pencarian Anda</small>
-                                            @endif
-                                        </div>
-                                    </td>
-                                </tr>
-                            @endforelse
-                        </tbody>
-                    </table>
-                </div>
-
-                {{-- Pagination --}}
-                @if ($reviews->hasPages())
-                    <div class="mt-4">
-                        {{ $reviews->appends(request()->query())->links() }}
-                    </div>
-                @endif
             </div>
         </div>
-    </section>
 
-    {{-- Modal Detail - Dipindahkan ke luar tabel --}}
-    @foreach ($reviews as $review)
-        <div class="modal fade" id="detailModal-{{ $review->id }}" tabindex="-1"
-            aria-labelledby="detailModalLabel-{{ $review->id }}" aria-hidden="true">
-            <div class="modal-dialog modal-lg modal-dialog-scrollable">
-                <div class="modal-content">
-                    <div class="modal-header bg-primary text-white">
-                        <h5 class="modal-title" id="detailModalLabel-{{ $review->id }}">
-                            <i class="bi bi-info-circle me-2"></i>Detail Review
-                        </h5>
-                        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"
-                            aria-label="Tutup"></button>
-                    </div>
-                    <div class="modal-body">
-                        <div class="row">
-                            <div class="col-md-6">
-                                <h6 class="text-primary mb-3">
-                                    <i class="bi bi-star-fill me-1"></i>Informasi Review
-                                </h6>
-                                <table class="table table-sm table-borderless">
-                                    <tr>
-                                        <td width="40%" class="fw-bold">Nama</td>
-                                        <td>{{ $review->nama_pengguna }}</td>
-                                    </tr>
-                                    <tr>
-                                        <td class="fw-bold">Rating</td>
-                                        <td>
-                                            {{ str_repeat('⭐', $review->rating) }}
-                                            <span class="badge bg-warning text-dark">({{ $review->rating }}/5)</span>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td class="fw-bold">Tanggal</td>
-                                        <td>{{ $review->tanggal_review->format('d F Y, H:i') }} WIB</td>
-                                    </tr>
-                                    <tr>
-                                        <td class="fw-bold">Status</td>
-                                        <td>
-                                            @if ($review->tampilkan)
-                                                <span class="badge bg-success">
-                                                    <i class="bi bi-eye"></i> Ditampilkan
-                                                </span>
-                                            @else
-                                                <span class="badge bg-secondary">
-                                                    <i class="bi bi-eye-slash"></i> Disembunyikan
-                                                </span>
-                                            @endif
-                                        </td>
-                                    </tr>
-                                </table>
-                            </div>
-                            <div class="col-md-6">
-                                <h6 class="text-primary mb-3">
-                                    <i class="bi bi-box-seam me-1"></i>Informasi Pemesanan
-                                </h6>
-                                <table class="table table-sm table-borderless">
-                                    <tr>
-                                        <td width="40%" class="fw-bold">Layanan</td>
-                                        <td>{{ $review->pemesanan->layanan->nama }}</td>
-                                    </tr>
-                                    <tr>
-                                        <td class="fw-bold">Telepon</td>
-                                        <td>
-                                            <a href="tel:{{ $review->pemesanan->telepon_pelanggan }}"
-                                                class="text-decoration-none">
-                                                <i class="bi bi-telephone"></i>
-                                                {{ $review->pemesanan->telepon_pelanggan }}
-                                            </a>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td class="fw-bold">Kota</td>
-                                        <td>
-                                            <i class="bi bi-geo-alt"></i> {{ $review->pemesanan->kota }}
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td class="fw-bold">Harga</td>
-                                        <td class="text-success fw-bold">
-                                            Rp {{ number_format($review->pemesanan->harga_final, 0, ',', '.') }}
-                                        </td>
-                                    </tr>
-                                </table>
+        {{-- Review Cards Grid --}}
+        <div class="row">
+            @forelse($reviews as $review)
+                <div class="col-lg-6 mb-4">
+                    <div class="card h-100 {{ !$review->tampilkan ? 'border-secondary' : '' }}">
+                        <div class="card-header">
+                            <div class="d-flex justify-content-between align-items-start">
+                                <div class="flex-grow-1">
+                                    <h5 class="mb-1">{{ $review->nama_pengguna }}</h5>
+                                    <div class="text-muted small">
+                                        <i class="bi bi-telephone me-1"></i>{{ $review->pemesanan->telepon_pelanggan }}
+                                    </div>
+                                </div>
+                                <div class="text-end">
+                                    @if ($review->tampilkan)
+                                        <span class="badge bg-success">
+                                            <i class="bi bi-eye"></i> Publik
+                                        </span>
+                                    @else
+                                        <span class="badge bg-secondary">
+                                            <i class="bi bi-eye-slash"></i> Private
+                                        </span>
+                                    @endif
+                                </div>
                             </div>
                         </div>
-                        <hr class="my-3">
-                        <div class="row">
-                            <div class="col-12">
-                                <h6 class="fw-bold mb-2">
-                                    <i class="bi bi-chat-left-text me-1"></i>Komentar:
-                                </h6>
-                                <div class="alert alert-light border">
-                                    <p class="mb-0">{{ $review->komentar }}</p>
+                        
+                        <div class="card-body">
+                            {{-- Rating & Service --}}
+                            <div class="d-flex justify-content-between align-items-center mb-3">
+                                <div class="rating-stars fs-4">
+                                    {{ str_repeat('⭐', $review->rating) }}
+                                    <span class="badge bg-warning ms-2">{{ $review->rating }}/5</span>
+                                </div>
+                                <span class="badge bg-info">
+                                    <i class="bi bi-box-seam me-1"></i>{{ $review->pemesanan->layanan->nama }}
+                                </span>
+                            </div>
+
+                            {{-- Comment --}}
+                            <div class="p-3 mb-3 border-start border-primary border-4 ps-3">
+                                <p class="mb-0 text-secondary" style="line-height: 1.6;">
+                                    "{{ Str::limit($review->komentar, 150) }}"
+                                </p>
+                            </div>
+
+                            {{-- Meta Info --}}
+                            <div class="d-flex justify-content-between align-items-center text-muted small mb-3">
+                                <span>
+                                    <i class="bi bi-calendar3 me-1"></i>
+                                    {{ $review->tanggal_review->format('d M Y, H:i') }}
+                                </span>
+                                <span>
+                                    <i class="bi bi-geo-alt me-1"></i>
+                                    {{ $review->pemesanan->kota }}
+                                </span>
+                            </div>
+
+                            {{-- Action Buttons --}}
+                            <div class="d-grid gap-2">
+                                <div class="btn-group" role="group">
+                                    <button type="button" class="btn btn-outline-primary btn-detail-review" 
+                                        data-review-id="{{ $review->id }}">
+                                        <i class="bi bi-info-circle me-1"></i>Detail Lengkap
+                                    </button>
+                                    
+                                    <form action="{{ route('admin.review.toggle', $review->id) }}" 
+                                        method="POST" class="form-toggle d-inline"
+                                        data-action="{{ $review->tampilkan ? 'sembunyikan' : 'tampilkan' }}">
+                                        @csrf
+                                        <button type="submit" 
+                                            class="btn {{ $review->tampilkan ? 'btn-outline-warning' : 'btn-outline-success' }}">
+                                            <i class="bi {{ $review->tampilkan ? 'bi-eye-slash' : 'bi-eye' }} me-1"></i>
+                                            {{ $review->tampilkan ? 'Sembunyikan' : 'Tampilkan' }}
+                                        </button>
+                                    </form>
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
-                            <i class="bi bi-x-circle me-1"></i>Tutup
-                        </button>
+                </div>
+            @empty
+                <div class="col-12">
+                    <div class="card">
+                        <div class="card-body text-center py-5">
+                            <div class="mb-4">
+                                <i class="bi bi-inbox display-1 text-muted"></i>
+                            </div>
+                            <h4 class="text-muted mb-2">Tidak Ada Review</h4>
+                            <p class="text-muted mb-0">
+                                @if (request('tampilkan') || request('rating'))
+                                    Tidak ada review yang sesuai dengan filter Anda. Coba ubah filter.
+                                @else
+                                    Belum ada review yang tersedia saat ini.
+                                @endif
+                            </p>
+                        </div>
                     </div>
+                </div>
+            @endforelse
+        </div>
+
+        {{-- Pagination --}}
+        @if ($reviews->hasPages())
+            <div class="d-flex justify-content-center mt-4">
+                {{ $reviews->appends(request()->query())->links() }}
+            </div>
+        @endif
+    </section>
+
+    {{-- Detail Modal --}}
+    <div class="modal fade" id="detailModal" tabindex="-1">
+        <div class="modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">
+                        <i class="bi bi-file-text me-2"></i>Detail Review Lengkap
+                    </h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body" id="detailModalBody">
+                    <!-- Dynamic content -->
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+                        <i class="bi bi-x-circle me-1"></i>Tutup
+                    </button>
                 </div>
             </div>
         </div>
-    @endforeach
+    </div>
 
-    {{-- JavaScript untuk Konfirmasi --}}
     @push('scripts')
         <script>
             document.addEventListener('DOMContentLoaded', function() {
-                // Konfirmasi hapus
-                document.querySelectorAll('.form-delete').forEach(form => {
-                    form.addEventListener('submit', function(e) {
-                        e.preventDefault();
-                        if (confirm(
-                                'Apakah Anda yakin ingin menghapus review ini? Tindakan ini tidak dapat dibatalkan.'
-                                )) {
-                            this.submit();
-                        }
+                // Auto-submit form on filter change
+                document.querySelectorAll('input[name="rating"], input[name="tampilkan"]').forEach(input => {
+                    input.addEventListener('change', function() {
+                        document.getElementById('filterForm').submit();
                     });
                 });
 
-                // Konfirmasi toggle tampilan
+                // Toggle confirmation
                 document.querySelectorAll('.form-toggle').forEach(form => {
                     form.addEventListener('submit', function(e) {
                         e.preventDefault();
                         const action = this.dataset.action;
-                        const message = action === 'sembunyikan' ?
-                            'Review akan disembunyikan dari halaman publik. Lanjutkan?' :
-                            'Review akan ditampilkan di halaman publik. Lanjutkan?';
+                        const message = action === 'sembunyikan' 
+                            ? 'Review akan disembunyikan dari publik. Lanjutkan?' 
+                            : 'Review akan ditampilkan ke publik. Lanjutkan?';
 
                         if (confirm(message)) {
                             this.submit();
@@ -333,13 +283,124 @@
                     });
                 });
 
-                // Auto-dismiss alerts
-                setTimeout(() => {
-                    document.querySelectorAll('.alert').forEach(alert => {
-                        const bsAlert = new bootstrap.Alert(alert);
-                        bsAlert.close();
+                // Detail modal
+                document.querySelectorAll('.btn-detail-review').forEach(button => {
+                    button.addEventListener('click', function() {
+                        const reviewId = this.dataset.reviewId;
+                        const reviews = {!! json_encode($reviews->keyBy('id')->toArray()) !!};
+                        const review = reviews[reviewId];
+                        
+                        if (review) {
+                            const modalBody = document.getElementById('detailModalBody');
+                            const ratingStars = '⭐'.repeat(review.rating);
+                            
+                            modalBody.innerHTML = `
+                                <div class="row g-4">
+                                    <div class="col-12">
+                                        <div class="text-center mb-4">
+                                            <h3 class="mb-2">${review.nama_pengguna}</h3>
+                                            <div class="fs-3 mb-2">${ratingStars}</div>
+                                            <span class="badge bg-warning text-dark px-3 py-2 fs-6">${review.rating} dari 5 Bintang</span>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-6">
+                                        <div class="card bg-light border-0">
+                                            <div class="card-body">
+                                                <h6 class="text-primary mb-3 fw-bold">
+                                                    <i class="bi bi-person-circle me-2"></i>Data Pelanggan
+                                                </h6>
+                                                <table class="table table-sm table-borderless mb-0">
+                                                    <tr>
+                                                        <td class="text-muted" width="45%">Nama</td>
+                                                        <td class="fw-bold">${review.nama_pengguna}</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td class="text-muted">Telepon</td>
+                                                        <td>
+                                                            <a href="tel:${review.pemesanan.telepon_pelanggan}" class="text-decoration-none">
+                                                                <i class="bi bi-telephone-fill text-success me-1"></i>
+                                                                ${review.pemesanan.telepon_pelanggan}
+                                                            </a>
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td class="text-muted">Lokasi</td>
+                                                        <td>
+                                                            <i class="bi bi-geo-alt-fill text-danger me-1"></i>
+                                                            ${review.pemesanan.kota}
+                                                        </td>
+                                                    </tr>
+                                                </table>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-6">
+                                        <div class="card bg-light border-0">
+                                            <div class="card-body">
+                                                <h6 class="text-primary mb-3 fw-bold">
+                                                    <i class="bi bi-box-seam me-2"></i>Data Pemesanan
+                                                </h6>
+                                                <table class="table table-sm table-borderless mb-0">
+                                                    <tr>
+                                                        <td class="text-muted" width="45%">Layanan</td>
+                                                        <td>
+                                                            <span class="badge bg-info">${review.pemesanan.layanan.nama}</span>
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td class="text-muted">Harga</td>
+                                                        <td class="fw-bold text-success">
+                                                            Rp ${new Intl.NumberFormat('id-ID').format(review.pemesanan.harga_final)}
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td class="text-muted">Tanggal Review</td>
+                                                        <td>
+                                                            <i class="bi bi-calendar-check me-1"></i>
+                                                            ${new Date(review.tanggal_review).toLocaleDateString('id-ID', {
+                                                                year: 'numeric', 
+                                                                month: 'long', 
+                                                                day: 'numeric'
+                                                            })}
+                                                        </td>
+                                                    </tr>
+                                                </table>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-12">
+                                        <div class="card border-primary">
+                                            <div class="card-header bg-primary text-white">
+                                                <h6 class="mb-0">
+                                                    <i class="bi bi-chat-quote me-2"></i>Komentar Review
+                                                </h6>
+                                            </div>
+                                            <div class="card-body">
+                                                <p class="mb-0 fs-6" style="line-height: 1.8; white-space: pre-wrap;">
+                                                    ${review.komentar}
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-12">
+                                        <div class="alert ${review.tampilkan ? 'alert-success' : 'alert-secondary'} mb-0">
+                                            <i class="bi ${review.tampilkan ? 'bi-eye-fill' : 'bi-eye-slash-fill'} me-2"></i>
+                                            <strong>Status:</strong> Review ini 
+                                            ${review.tampilkan ? '<strong>ditampilkan</strong> di halaman publik' : '<strong>disembunyikan</strong> dari halaman publik'}
+                                        </div>
+                                    </div>
+                                </div>
+                            `;
+                            
+                            const modal = new bootstrap.Modal(document.getElementById('detailModal'));
+                            modal.show();
+                        }
                     });
-                }, 5000);
+                });
             });
         </script>
     @endpush

@@ -10,28 +10,62 @@ class PemesananController extends Controller
 {
     public function index(Request $request)
     {
-        $query = Pemesanan::with('layanan')->latest();
+        // Hitung total keseluruhan per status (tanpa pagination)
+        $totalMenunggu = \App\Models\Pemesanan::where('status', 'menunggu')->count();
+        $totalProses = \App\Models\Pemesanan::where('status', 'proses')->count();
+        $totalSelesai = \App\Models\Pemesanan::where('status', 'selesai')->count();
+        $totalDibatalkan = \App\Models\Pemesanan::where('status', 'dibatalkan')->count();
 
-        // Filter berdasarkan status
+        // Query pemesanan dengan filter
+        $query = \App\Models\Pemesanan::with('layanan');
+
+        // Filter status
         if ($request->filled('status')) {
             $query->where('status', $request->status);
         }
 
-        // Filter berdasarkan layanan
+        // Filter layanan
         if ($request->filled('layanan_id')) {
             $query->where('layanan_id', $request->layanan_id);
         }
 
-        // Filter berdasarkan kota
-        if ($request->filled('kota')) {
-            $query->where('kota', 'LIKE', '%' . $request->kota . '%');
+        // Filter bulan
+        if ($request->filled('bulan')) {
+            $query->whereMonth('tanggal_mulai', $request->bulan);
         }
 
-        $pemesanans = $query->paginate(10);
-        $layanans = Layanan::where('status', true)->get();
-        
-        return view('admin.pemesanan.index', compact('pemesanans', 'layanans'));
+        // Filter tahun
+        if ($request->filled('tahun')) {
+            $query->whereYear('tanggal_mulai', $request->tahun);
+        }
+
+        // Filter kota
+        if ($request->filled('kota')) {
+            $query->where('kota', 'like', '%' . $request->kota . '%');
+        }
+
+        // Urutkan berdasarkan status: menunggu -> proses -> selesai -> dibatalkan
+        // Kemudian urutkan berdasarkan tanggal_mulai terbaru
+        $query->orderByRaw("FIELD(status, 'menunggu', 'proses', 'selesai', 'dibatalkan')")
+            ->orderBy('tanggal_mulai', 'desc');
+
+        // Pagination
+        $perPage = $request->get('per_page', 10);
+        $pemesanans = $query->paginate($perPage);
+
+        // Get all layanan untuk dropdown filter
+        $layanans = \App\Models\Layanan::all();
+
+        return view('admin.pemesanan.index', compact(
+            'pemesanans',
+            'layanans',
+            'totalMenunggu',
+            'totalProses',
+            'totalSelesai',
+            'totalDibatalkan'
+        ));
     }
+
 
     public function create()
     {
@@ -53,7 +87,7 @@ class PemesananController extends Controller
             'tanggal_selesai' => 'nullable|date|after_or_equal:tanggal_mulai',
             'harga_final' => 'required|numeric|min:0',
             'catatan' => 'nullable|string',
-            'status' => 'required|in:pending,proses,selesai,dibatalkan'
+            'status' => 'required|in:menunggu,proses,selesai,dibatalkan'
         ]);
 
         Pemesanan::create($validated);
@@ -88,7 +122,7 @@ class PemesananController extends Controller
             'tanggal_selesai' => 'nullable|date|after_or_equal:tanggal_mulai',
             'harga_final' => 'required|numeric|min:0',
             'catatan' => 'nullable|string',
-            'status' => 'required|in:pending,proses,selesai,dibatalkan'
+            'status' => 'required|in:menunggu,proses,selesai,dibatalkan'
         ]);
 
         $pemesanan->update($validated);

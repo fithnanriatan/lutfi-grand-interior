@@ -169,7 +169,7 @@
                                     id="status" 
                                     name="status"
                                     required>
-                                <option value="pending" {{ old('status') == 'pending' ? 'selected' : '' }}>Pending</option>
+                                <option value="menunggu" {{ old('status') == 'menunggu' ? 'selected' : '' }}>Menunggu</option>
                                 <option value="proses" {{ old('status') == 'proses' ? 'selected' : '' }}>Dalam Proses</option>
                                 <option value="selesai" {{ old('status') == 'selesai' ? 'selected' : '' }}>Selesai</option>
                                 <option value="dibatalkan" {{ old('status') == 'dibatalkan' ? 'selected' : '' }}>Dibatalkan</option>
